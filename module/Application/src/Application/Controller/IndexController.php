@@ -16,6 +16,12 @@ class IndexController extends AbstractActionController
 {
     public function indexAction()
     {
-        return new ViewModel();
+    	$view = new ViewModel();
+    	$db = $this->serviceLocator->get('database');
+    	$stmt = $db->query("select * from Area");
+    	$result = $stmt->execute();
+    	$results = $result->current();
+    	$view->results = $results;
+    	return $view;
     }
 }
