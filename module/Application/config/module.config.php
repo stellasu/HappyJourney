@@ -50,6 +50,18 @@ return array(
                     ),
                 ),
             ),
+        		
+        	'listArea' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/listarea',
+        					'defaults' => array(
+        							'__NAMESPACE__' => 'Application\Controller',
+        							'controller'    => 'Index',
+        							'action'        => 'listArea',
+        					),
+        			),
+        		),     		
         ),
     ),
     'service_manager' => array(
