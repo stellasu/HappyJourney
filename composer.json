@@ -4,6 +4,8 @@
     "homepage": "http://happyjourney.local/",
     "require": {
         "php": ">=5.3.3",
-        "zendframework/zendframework": "2.*"
+        "zendframework/zendframework": "2.*",
+        "doctrine/common": ">=2.1", 
+        "doctrine/orm": ">=2.1"
     }
 }
