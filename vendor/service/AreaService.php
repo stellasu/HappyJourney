@@ -2,24 +2,25 @@
 namespace Service;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Zend\Db\Sql;
 
 class AreaService {
 	
 	protected $serviceLocator;
-	protected $db;
+	protected $em;
 	
 	public function __construct(ServiceLocatorInterface $serviceLocator){
 		$this->serviceLocator = $serviceLocator;
-		$this->db = $this->serviceLocator->get('database');		
+		$this->em = $this->serviceLocator->get('entity-manager');	
 	}
 	
 	public function getAreas(){
-		$sql = new Sql($this->db);
-		$sql->select()->from("Area");
-		$selectString = $sql->buildSqlString($select);
-		$results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
+		error_log("1");
+		try {
+			$results = $this->em->getRepository('Application\Model\Entity\Area')->findAll();
+		} catch (\Exception $e) {
+			error_log("error: ".$e->getMessage());
+		}
+		error_log("2");
 		return $results;
 	}
 }
