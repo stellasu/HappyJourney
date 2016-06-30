@@ -5,10 +5,7 @@ use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface; 
 use Doctrine\ORM\Tools\Setup; 
 use Doctrine\ORM\EntityManager as DoctrineEntityManager;
-use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
-use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Annotations\AnnotationRegistry;
+require_once "vendor/autoload.php";
 
 class EntityManager implements FactoryInterface {
 	
@@ -27,20 +24,11 @@ class EntityManager implements FactoryInterface {
 		if(!isset($doctrineDbConfig['user'])){ 
 			$doctrineDbConfig['user'] = $doctrineDbConfig['username'];
 		} 
-		//$doctrineConfig = Setup::createAnnotationMetadataConfiguration($config['doctrine']['entity_path'], true, null, null, false); 
-		//$entityManager = DoctrineEntityManager::create($doctrineDbConfig, $doctrineConfig); 
+		$doctrineConfig = Setup::createAnnotationMetadataConfiguration($config['doctrine']['entity_path'], false, null, null, false); 
+		$entityManager = DoctrineEntityManager::create($doctrineDbConfig, $doctrineConfig); 
 
+		return $entityManager;  
 		
-		$isDevMode = false;
-		$doctrineConfig = Setup::createConfiguration($isDevMode);
-		$driver = new AnnotationDriver(new AnnotationReader(), $config['doctrine']['entity_path']);
-		
-		// registering noop annotation autoloader - allow all annotations by default
-		AnnotationRegistry::registerLoader('class_exists');
-		$doctrineConfig->setMetadataDriverImpl($driver);
-		
-		$entityManager = DoctrineEntityManager::create($doctrineDbConfig, $doctrineConfig);
-		return $entityManager; 
 	} 
 
 	
