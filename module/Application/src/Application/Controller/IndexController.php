@@ -17,12 +17,7 @@ use Service\AreaService;
 class IndexController extends AbstractActionController
 {
 	
-	/**
-	 * @var DoctrineORMEntityManager
-	 */
-	protected $em;
-	
-    public function indexAction()
+	public function indexAction()
     {
     	$view = new ViewModel();   	
     	return $view;
@@ -32,18 +27,16 @@ class IndexController extends AbstractActionController
     {
     	error_log("listarea");
     	$areaService = new AreaService($this->serviceLocator);
-    	error_log("0");
     	try {
     		$results = $areaService->getAreas();
     	} catch (\Exception $e) {
     		error_log("error: ".$e->getMessage());
     	}
-    	
     	error_log("results: ".json_encode($results));
     	if($results != null){
     		$view = new JsonModel(array('status'=>0, 'results'=>$results));
     	}else{
-    		$view = new JsonModel(array('status'=>0, 'results'=>null));
+    		$view = new JsonModel(array('status'=>1, 'results'=>null));
     	}
     	return $view;
     }
