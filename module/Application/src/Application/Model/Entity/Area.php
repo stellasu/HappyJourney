@@ -3,7 +3,6 @@ namespace Application\Model\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /***
- * @author biyaosu
  * @ORM\Entity
  * @ORM\Table(name="Area")
  */

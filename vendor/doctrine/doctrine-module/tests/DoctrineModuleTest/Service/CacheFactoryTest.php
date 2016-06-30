@@ -57,6 +57,43 @@ class CacheFactoryTest extends BaseTestCase
         $this->assertSame('bar', $service->getNamespace());
     }
 
+    /**
+     * @covers \DoctrineModule\Service\CacheFactory::createService
+     * @group 547
+     */
+    public function testCreateZendCache()
+    {
+        $factory        = new CacheFactory('phpunit');
+        $serviceManager = new ServiceManager();
+        $serviceManager->setAlias('Config', 'Configuration');
+        $serviceManager->setService(
+            'Configuration',
+            [
+                'doctrine' => [
+                    'cache' => [
+                        'phpunit' => [
+                            'class' => 'DoctrineModule\Cache\ZendStorageCache',
+                            'instance' => 'my-zend-cache',
+                            'namespace' => 'DoctrineModule',
+                        ],
+                    ],
+                ],
+                'caches' => [
+                    'my-zend-cache' => [
+                        'adapter' => [
+                            'name' => 'blackhole'
+                        ]
+                    ]
+                ]
+            ]
+        );
+        $serviceManager->addAbstractFactory('Zend\Cache\Service\StorageCacheAbstractServiceFactory');
+
+        $cache = $factory->createService($serviceManager);
+
+        $this->assertInstanceOf('DoctrineModule\Cache\ZendStorageCache', $cache);
+    }
+
     public function testCreatePredisCache()
     {
         $factory        = new CacheFactory('predis');
@@ -67,8 +104,8 @@ class CacheFactoryTest extends BaseTestCase
                 'doctrine' => [
                     'cache' => [
                         'predis' => [
-                            'class'     => 'Doctrine\Common\Cache\PredisCache',
-                            'instance'  => 'my_predis_alias',
+                            'class' => 'Doctrine\Common\Cache\PredisCache',
+                            'instance' => 'my_predis_alias',
                             'namespace' => 'DoctrineModule',
                         ],
                     ],
@@ -76,9 +113,8 @@ class CacheFactoryTest extends BaseTestCase
             ]
         )->setService(
             'my_predis_alias',
-            $this->getMock('Predis\Client')
+            $this->getMock('Predis\ClientInterface')
         );
-
         $cache = $factory->createService($serviceManager);
 
         $this->assertInstanceOf('Doctrine\Common\Cache\PredisCache', $cache);

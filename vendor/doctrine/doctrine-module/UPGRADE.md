@@ -1,3 +1,23 @@
+# 1.0.1
+
+ * Drop compatibility with PHP 5.4 [#553](https://github.com/doctrine/DoctrineModule/pull/553)
+ * Improve TravisCi build to work with PHP 7 [#553](https://github.com/doctrine/DoctrineModule/pull/553)
+ * Update doctrine/common ~2.6 [#551](https://github.com/doctrine/DoctrineModule/pull/551)
+
+# 1.0.0
+
+ * Remove deprecated api call from test [#523](https://github.com/doctrine/DoctrineModule/pull/523)
+ * Allow for the use of Zend\Cache\Service\StorageCacheAbstractServiceFactory [#547](https://github.com/doctrine/DoctrineModule/pull/547)
+
+# 0.10.0
+
+ * Fixed php_codesniffer dependency [#521](https://github.com/doctrine/DoctrineModule/pull/521)
+ * Fixed wrong Predis Mock [#534](https://github.com/doctrine/DoctrineModule/pull/534)
+ * Update hydrator.md [#537](https://github.com/doctrine/DoctrineModule/pull/537)
+ * Fix for issue #230 and  fixes for #234 [#520](https://github.com/doctrine/DoctrineModule/pull/520)
+ * Feature/snake case [#539](https://github.com/doctrine/DoctrineModule/pull/539)
+ * Adds additional processing for DoctrineObject::toMany [#535](https://github.com/doctrine/DoctrineModule/pull/535)
+
 # 0.9.0
 
  * Fixed intend in hydrator.md [#471](https://github.com/doctrine/DoctrineModule/pull/471)
