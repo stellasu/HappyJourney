@@ -9,13 +9,17 @@ function listAreas()
 		dataType:"json",
 		type:"get",
 		success: function(response) {
-			console.log(serialize(response.results));
+			var ctDropdown = $("body").find(".customized-travel-dropdown");
+			$.each(response.results, function(i, val){
+				var item = "<li><a href='services.html' data-areaId="+val.Id+">"+val.Name+"</a></li>";
+				ctDropdown.append(item);
+			});
 		},
 		beforeSend: function() {
 			console.log("fetching areas ...");
 		},
-		error: function() {
-			console.log("error fetching areas");
+		error: function(xhr, status, error) {
+			console.log(xhr.responseText);
 		}
 	});
 }

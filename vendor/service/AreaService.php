@@ -2,8 +2,8 @@
 namespace Service;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\Db\Sql\Sql;
-use Zend\Db\Sql\Zend\Db\Sql;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Adapter\Driver\ResultInterface;
 
 class AreaService {
 	
@@ -12,14 +12,25 @@ class AreaService {
 	
 	public function __construct(ServiceLocatorInterface $serviceLocator){
 		$this->serviceLocator = $serviceLocator;
-		$this->db = $this->serviceLocator->get('database');		
+		$this->db = $this->serviceLocator->get('database');	
 	}
 	
 	public function getAreas(){
-		$sql = new Sql($this->db);
-		$sql->select()->from("Area");
-		$selectString = $sql->buildSqlString($select);
-		$results = $adapter->query($selectString, $adapter::QUERY_MODE_EXECUTE);
-		return $results;
+		try {
+			$query = "Select * from Area";
+			$sqlResult = $this->db->createStatement($query)->execute();
+			$returnArray = array();
+			if ($sqlResult instanceof ResultInterface && $sqlResult->isQueryResult()) {
+				$resultSet = new ResultSet;
+    			$resultSet->initialize($sqlResult);
+    			foreach($resultSet as $row){
+    				$returnArray[] = array('Id'=>$row->Id, 'Name'=>$row->Name);
+    			}
+			}
+		} catch (\Exception $e) {
+			error_log("error: ".$e->getMessage());
+		}
+		return $returnArray;
+		
 	}
 }

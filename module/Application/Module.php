@@ -36,7 +36,7 @@ class Module
                 ),
             ),
         	'Zend\Loader\ClassMapAutoloader' => array(
-        			__DIR__ . '/../../vendor/service/autoload_classmap.php',
+        			__DIR__ . '/../../autoload_classmap.php',
         	),
         );
     }

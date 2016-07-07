@@ -68,6 +68,7 @@ return array(
         'factories' => array(
             'translator' => 'Zend\I18n\Translator\TranslatorServiceFactory',
         	'database' => 'Application\Service\Factory\Database',
+        	'entity-manager' => 'Application\Service\Factory\EntityManager',
         ),
     ),
     'translator' => array(
@@ -100,5 +101,15 @@ return array(
         'template_path_stack' => array(
             __DIR__ . '/../view',
         ),
+    	'strategies' => array(
+    		'ViewJsonStrategy',
+    	),
     ),
+	'doctrine' => array( 
+		'entity_path' => array(
+			__DIR__ . '/../src/Application/Model/Entity/',
+		),
+	)
+		
+		
 );
