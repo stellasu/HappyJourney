@@ -11,6 +11,7 @@ namespace Application\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Service\AreaService;
 
@@ -19,24 +20,24 @@ class IndexController extends AbstractActionController
 	
 	public function indexAction()
     {
-    	$view = new ViewModel();   	
+    	$view = new ViewModel(); 
     	return $view;
     }
     
     public function listAreaAction()
     {
-    	error_log("listarea");
+    	$view = new JsonModel();
+    	$view->setTerminal(true);
     	$areaService = new AreaService($this->serviceLocator);
     	try {
     		$results = $areaService->getAreas();
     	} catch (\Exception $e) {
     		error_log("error: ".$e->getMessage());
     	}
-    	error_log("results: ".json_encode($results));
     	if($results != null){
-    		$view = new JsonModel(array('status'=>0, 'results'=>$results));
+    		$view->setVariables(array('status'=>0, 'results'=>$results));
     	}else{
-    		$view = new JsonModel(array('status'=>1, 'results'=>null));
+    		$view->setVariables(array('status'=>1, 'results'=>null));
     	}
     	return $view;
     }

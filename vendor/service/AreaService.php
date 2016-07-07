@@ -3,6 +3,7 @@ namespace Service;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\Adapter\Driver\ResultInterface;
 
 class AreaService {
 	
@@ -19,13 +20,17 @@ class AreaService {
 			$query = "Select * from Area";
 			$sqlResult = $this->db->createStatement($query)->execute();
 			$returnArray = array();
-			// iterate through the rows
-			foreach ($sqlResult as $result) {
-				$returnArray[] = $result;
+			if ($sqlResult instanceof ResultInterface && $sqlResult->isQueryResult()) {
+				$resultSet = new ResultSet;
+    			$resultSet->initialize($sqlResult);
+    			foreach($resultSet as $row){
+    				$returnArray[] = array('Id'=>$row->Id, 'Name'=>$row->Name);
+    			}
 			}
 		} catch (\Exception $e) {
 			error_log("error: ".$e->getMessage());
 		}
 		return $returnArray;
+		
 	}
 }
