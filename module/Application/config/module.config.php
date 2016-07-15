@@ -56,12 +56,33 @@ return array(
         			'options' => array(
         					'route'    => '/listarea',
         					'defaults' => array(
-        							'__NAMESPACE__' => 'Application\Controller',
-        							'controller'    => 'Index',
+        							'controller'    => 'Application\Controller\Index',
         							'action'        => 'listArea',
         					),
         			),
-        		),     		
+        	),  
+        		
+        	'customizedTravel' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/customizedtravel',
+        					'defaults' => array(
+        							'controller'    => 'Application\Controller\Index',
+        							'action'        => 'customizedtravel',
+        					),
+        			),
+        	),
+
+        	'areaDetail' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/area/detail/:id',
+        					'defaults' => array(
+        							'controller'    => 'Application\Controller\Area',
+        							'action'        => 'detail',
+        					),
+        			),
+        	),
         ),
     ),
     'service_manager' => array(
@@ -83,7 +104,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+        	'Application\Controller\Area' => 'Application\Controller\AreaController'
         ),
     ),
     'view_manager' => array(
