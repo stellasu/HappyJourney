@@ -20,7 +20,9 @@ class IndexController extends AbstractActionController
 	
 	public function indexAction()
     {
-    	$view = new ViewModel(); 
+    	$view = new ViewModel();
+    	//$config = $this->getServiceLocator()->get('config');
+    	//$view->configs = $config['configs'];
     	return $view;
     }
     
@@ -39,6 +41,12 @@ class IndexController extends AbstractActionController
     	}else{
     		$view->setVariables(array('status'=>1, 'results'=>null));
     	}
+    	return $view;
+    }
+    
+    public function customizedTravelAction()
+    {
+    	$view = new ViewModel();
     	return $view;
     }
 }
