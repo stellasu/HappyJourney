@@ -61,13 +61,24 @@ return array(
         					),
         			),
         	),  
-
-        	'destinationDetail' => array(
+        		
+        	'customizedTravel' => array(
         			'type' => 'segment',
         			'options' => array(
-        					'route'    => '/destination/detail',
+        					'route'    => '/customizedtravel',
         					'defaults' => array(
-        							'controller'    => 'Application\Controller\Destination',
+        							'controller'    => 'Application\Controller\Index',
+        							'action'        => 'customizedtravel',
+        					),
+        			),
+        	),
+
+        	'areaDetail' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/area/detail/:id',
+        					'defaults' => array(
+        							'controller'    => 'Application\Controller\Area',
         							'action'        => 'detail',
         					),
         			),
@@ -94,7 +105,7 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-        	'Application\Controller\Destination' => 'Application\Controller\DestinationController'
+        	'Application\Controller\Area' => 'Application\Controller\AreaController'
         ),
     ),
     'view_manager' => array(
