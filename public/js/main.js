@@ -11,7 +11,7 @@ function listAreas()
 		success: function(response) {
 			var ctDropdown = $("body").find(".customized-travel-dropdown");
 			$.each(response.results, function(i, val){
-				var item = "<li><a href='services.html' data-areaId="+val.Id+">"+val.Name+"</a></li>";
+				var item = "<li><a href='http://"+window.location.host+"/area/detail/"+val.Id+"' data-areaId="+val.Id+">"+val.Name+"</a></li>";
 				ctDropdown.append(item);
 			});
 		},
