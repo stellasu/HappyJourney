@@ -3,7 +3,7 @@
 return array(
     'Application\Module'                                                                  => __DIR__ . '/module/Application/Module.php',
     'Application\Controller\IndexController'                                              => __DIR__ . '/module/Application/src/Application/Controller/IndexController.php',
-    'Application\Controller\DestinationController'                                        => __DIR__ . '/module/Application/src/Application/Controller/DestinationController.php',
+    'Application\Controller\AreaController'                                        		  => __DIR__ . '/module/Application/src/Application/Controller/AreaController.php',
     'Application\Model\Entity\Area'                                                       => __DIR__ . '/module/Application/src/Application/Model/Entity/Area.php',
     'Application\Service\Factory\Database'                                                => __DIR__ . '/module/Application/src/Application/Service/Factory/Database.php',
     'Application\Service\Factory\EntityManager'                                           => __DIR__ . '/module/Application/src/Application/Service/Factory/EntityManager.php',
