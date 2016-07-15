@@ -24,13 +24,8 @@
         								->prependFile ( $this->basePath () . '/js/jquery-1.11.1.min.js' )
         								?>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			listAreas();
-		});
-	</script>
-	<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-	<script>
-	    $(function () {
+		//load responsive sliders
+	 	$(function () {
 	      $("#slider").responsiveSlides({
 	      	auto: true,
 	      	nav: true,
@@ -38,8 +33,17 @@
 	        namespace: "callbacks",
 	        pager: true,
 	      });
-	    });		
-  	</script>
+	    });	
+	    
+		$(document).ready(function(){
+			//get areas, append to customized travel dropdown list
+			listAreas();
+
+			//get current url and append to Home href
+			var home_url = "http://"+window.location.host;
+			$("body").find(".home-url").attr("href", home_url);
+		});
+	</script>
 </head>
 <body>
 	<div class="header">
@@ -73,8 +77,8 @@
 						<div class="collapse navbar-collapse"
 							id="bs-example-navbar-collapse-1">
 							<ul class="nav navbar-nav cl-effect-16">
-								<li class="active"><a href="index.html">Home <span
-										class="sr-only">(current)</span></a></li>
+								<li class="active"><a class="home-url" href="">Home<span
+										class="sr-only"></span></a></li>
 								<li class="dropdown"><a href=""
 									class="dropdown-toggle" data-toggle="dropdown" role="button"
 									aria-haspopup="true" aria-expanded="false">订制旅游<span
