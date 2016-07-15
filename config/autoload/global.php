@@ -12,5 +12,7 @@
  */
 
 return array(
-    // ...
+    'configs' => array(
+    		'host' => 'happyjourney.local',
+    )		
 );
