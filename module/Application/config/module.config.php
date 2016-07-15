@@ -56,12 +56,22 @@ return array(
         			'options' => array(
         					'route'    => '/listarea',
         					'defaults' => array(
-        							'__NAMESPACE__' => 'Application\Controller',
-        							'controller'    => 'Index',
+        							'controller'    => 'Application\Controller\Index',
         							'action'        => 'listArea',
         					),
         			),
-        		),     		
+        	),  
+
+        	'destinationDetail' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/destination/detail',
+        					'defaults' => array(
+        							'controller'    => 'Application\Controller\Destination',
+        							'action'        => 'detail',
+        					),
+        			),
+        	),
         ),
     ),
     'service_manager' => array(
@@ -83,7 +93,8 @@ return array(
     ),
     'controllers' => array(
         'invokables' => array(
-            'Application\Controller\Index' => 'Application\Controller\IndexController'
+            'Application\Controller\Index' => 'Application\Controller\IndexController',
+        	'Application\Controller\Destination' => 'Application\Controller\DestinationController'
         ),
     ),
     'view_manager' => array(
