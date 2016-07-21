@@ -14,6 +14,7 @@ use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Service\AreaService;
+use Service\TextService;
 
 class IndexController extends AbstractActionController
 {
@@ -47,6 +48,18 @@ class IndexController extends AbstractActionController
     public function customizedTravelAction()
     {
     	$view = new ViewModel();
+    	$textService = new TextService($this->serviceLocator);
+    	try {
+    		$results = $textService->getCustomizedTravelMainDescription();
+    	} catch (\Exception $e) {
+    		error_log("error: ".$e->getMessage());
+    	}
+    	error_log("results: ".json_encode($results));
+    	if($results != null){
+    		$view->setVariables(array('status'=>0, 'results'=>$results));
+    	}else{
+    		$view->setVariables(array('status'=>1, 'results'=>null));
+    	}
     	return $view;
     }
 }
