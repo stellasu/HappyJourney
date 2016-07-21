@@ -1928,6 +1928,7 @@ return array(
     'SebastianBergmann\RecursionContext\ContextTest'                                      => __DIR__ . '/vendor/sebastian/recursion-context/tests/ContextTest.php',
     'SebastianBergmann\Version'                                                           => __DIR__ . '/vendor/sebastian/version/src/Version.php',
     'Service\AreaService'                                                                 => __DIR__ . '/vendor/service/AreaService.php',
+    'Service\TextService'                                                                 => __DIR__ . '/vendor/service/TextService.php',
     'Symfony\Component\Console\Application'                                               => __DIR__ . '/vendor/symfony/console/Application.php',
     'Symfony\Component\Console\Command\Command'                                           => __DIR__ . '/vendor/symfony/console/Command/Command.php',
     'Symfony\Component\Console\Command\HelpCommand'                                       => __DIR__ . '/vendor/symfony/console/Command/HelpCommand.php',
