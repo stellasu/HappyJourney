@@ -32,7 +32,6 @@ class TextService {
 	 */
 	public function getMostRecentText($type)
 	{
-		error_log("type: ".$type);
 		if(is_int($type) && $type>0){
 			try {
 				$query = "Select Text.* From Text Inner Join (Select Id, MAX(Version) Version From Text Where Type = ? Group By Id) S On Text.Version = S.Version Where Text.Type = ? And Deleted = 0";
