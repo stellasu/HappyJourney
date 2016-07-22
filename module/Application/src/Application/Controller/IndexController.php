@@ -50,12 +50,13 @@ class IndexController extends AbstractActionController
     	$view = new ViewModel();
     	$textService = new TextService($this->serviceLocator);
     	try {
-    		$results = $textService->getCustomizedTravelMainDescription();
+    		$textResults = $textService->getCustomizedTravelMainDescription();
     	} catch (\Exception $e) {
     		error_log("error: ".$e->getMessage());
     	}
-    	error_log("results: ".json_encode($results));
-    	if($results != null){
+    	if($textResults != null){
+    		$text = $textResults[0]->Text;
+    		$results->text = $text;
     		$view->setVariables(array('status'=>0, 'results'=>$results));
     	}else{
     		$view->setVariables(array('status'=>1, 'results'=>null));
