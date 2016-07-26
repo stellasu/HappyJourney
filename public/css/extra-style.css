@@ -1,0 +1,11 @@
+table.bottom-space {
+	border-collapse:separate; 
+	border-spacing:1em;
+	font-size:15px;
+}
+
+.error-message {
+	font-style:italic;
+	font-size:14px;
+	color:red;
+}

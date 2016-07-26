@@ -54,6 +54,7 @@ class IndexController extends AbstractActionController
     	} catch (\Exception $e) {
     		error_log("error: ".$e->getMessage());
     	}
+    	$results = null;
     	if($textResults != null){
     		$text = $textResults[0]->Text;
     		$results->text = $text;

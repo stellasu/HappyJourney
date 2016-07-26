@@ -8,6 +8,41 @@ jQuery(document).ready(function($) {
 		$(".customized-travel-dropdown").css("display", "block");
 	});
 	
+	/**
+	 * user submit form in ct-main page
+	 */
+	$("#ct-customer-submission-form-submit").click(function(e){
+		e.preventDefault();
+		var firstname = $("#ct-first-name input").val();
+		var lastname = $("#ct-last-name input").val();
+		var phone = $("#ct-phone input").val();
+		var email = $("#ct-email input").val();
+		var wechat = $("#ct-wechat input").val();
+		var message = $("#ct-message-textarea textarea").val();
+		var ready = true;
+		if(firstname=='' || lastname==''){
+			ready = false;
+			$("span.name-span").css("display","inline");
+		}else{
+			$("span.name-span").css("display","none");
+		}
+		if(phone=='' && email=='' && wechat==''){
+			ready = false;
+			$("span.contact-span").css("display","inline");
+		}else{
+			$("span.contact-span").css("display","none");
+		}
+		if(message==''){
+			ready = false;
+			$("span.message-span").css("display","block");
+		}else{
+			$("span.message-span").css("display","none");
+		}
+		if(ready){
+			console.log("ready to submit");
+		}
+	})
+	
 });
 
 
