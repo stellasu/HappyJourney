@@ -1929,6 +1929,7 @@ return array(
     'SebastianBergmann\Version'                                                           => __DIR__ . '/vendor/sebastian/version/src/Version.php',
     'Service\AreaService'                                                                 => __DIR__ . '/vendor/service/AreaService.php',
     'Service\TextService'                                                                 => __DIR__ . '/vendor/service/TextService.php',
+    'Service\CustomerSubmissionService'                                                   => __DIR__ . '/vendor/service/CustomerSubmissionService.php',
     'Symfony\Component\Console\Application'                                               => __DIR__ . '/vendor/symfony/console/Application.php',
     'Symfony\Component\Console\Command\Command'                                           => __DIR__ . '/vendor/symfony/console/Command/Command.php',
     'Symfony\Component\Console\Command\HelpCommand'                                       => __DIR__ . '/vendor/symfony/console/Command/HelpCommand.php',
