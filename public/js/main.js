@@ -3,7 +3,25 @@ jQuery(document).ready(function($) {
 	/**
 	 * get areas, append to customized travel dropdown list
 	 */
-	listAreas();
+	$.ajax({
+		url:"/listarea",
+		dataType:"json",
+		type:"get",
+		success: function(response) {
+			var ctDropdown = $("body").find(".customized-travel-dropdown");
+			$.each(response.results, function(i, val){
+				var item = "<li><a href='http://"+window.location.host+"/area/detail/"+val.Id+"' data-areaId="+val.Id+">"+val.Name+"</a></li>";
+				ctDropdown.append(item);
+			});
+			ctDropdown.append('<li style="padding-left:80px; cursor:default;" onclick="foldAreaList();">[收起]</li>');
+		},
+		beforeSend: function() {
+			console.log("fetching areas ...");
+		},
+		error: function(xhr, status, error) {
+			console.log(xhr.responseText);
+		}
+	});
 
 	/**
 	 * get current url and append to Home href
@@ -13,6 +31,23 @@ jQuery(document).ready(function($) {
 	//get current url and append to customized_travel_url
 	var customized_travel_url = "http://"+window.location.host+"/customizedtravel";
 	$("body").find(".customized-travel-dropdown-toggle").attr("href", customized_travel_url);
+	
+	/**
+	 * get current url and decide which tab should be highlighted
+	 */
+	$("#main-navbar li").removeClass("active");
+	var current_url = window.location.pathname;
+	if(current_url == "/"){
+		$("#home-tab-header").addClass("active");
+	}else if(current_url == "/customizedtravel"){
+		$("#ct-tab-header").addClass("active");
+	}else if(current_url == "/shuttleservice"){
+		$("#shuttle-tab-header").addClass("active");
+	}else if(current_url == "/information"){
+		$("#info-tab-header").addClass("active");
+	}else if(current_url == "/parteners"){
+		$("#partener-tab-header").addClass("active");
+	}
 	
 	/**
 	 * load responsive sliders
@@ -107,33 +142,6 @@ jQuery(document).ready(function($) {
 	})
 	
 });
-
-
-/**
- * fetch all areas from db, and apply to "customized travel service" drop down list
- */
-function listAreas()
-{
-	$.ajax({
-		url:"/listarea",
-		dataType:"json",
-		type:"get",
-		success: function(response) {
-			var ctDropdown = $("body").find(".customized-travel-dropdown");
-			$.each(response.results, function(i, val){
-				var item = "<li><a href='http://"+window.location.host+"/area/detail/"+val.Id+"' data-areaId="+val.Id+">"+val.Name+"</a></li>";
-				ctDropdown.append(item);
-			});
-			ctDropdown.append('<li style="padding-left:80px; cursor:default;" onclick="foldAreaList();">[收起]</li>');
-		},
-		beforeSend: function() {
-			console.log("fetching areas ...");
-		},
-		error: function(xhr, status, error) {
-			console.log(xhr.responseText);
-		}
-	});
-}
 
 /**
  * close customized-travel dropdown
