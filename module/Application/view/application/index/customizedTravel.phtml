@@ -11,7 +11,7 @@
 						</table>
 						<table id="ct-form-table2" class="bottom-space">
 							<span class="contact-span error-message" style="margin-left:1em; display:none;">* 请至少填写以下一种联系方式</span>
-							<tr id="ct-phone"><td><label>电话号码：</label></td><td><input type="text"></td></tr>
+							<tr id="ct-phone"><td><label>电话号码：&nbsp;<strong>+1</strong></label></td><td><input type="text"></td></tr>
 							<tr id="ct-email"><td><label>邮箱：</label></td><td><input type="text"></td></tr>
 							<tr id="ct-wechat"><td><label>微信号：</label></td><td><input type="text"></td></tr>
 						</table>
@@ -21,6 +21,7 @@
 						<span id="ct-message-textarea" style="margin-left:1em;"><textarea></textarea></span>
 						<input id="ct-customer-submission-form-submit" type="button" value="提交" style="margin-left:1em; margin-top: 1em;" >
 				 	 </form>
+				 	 <div id="ct-customer-submission-error-message" style="color:red;"><ul></ul></div>
 				</div>
 				<div class="col-md-6 contact-left">
 					<p><?php echo $this->results->text;?></p>

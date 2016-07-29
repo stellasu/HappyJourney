@@ -72,6 +72,17 @@ return array(
         					),
         			),
         	),
+        		
+        	'submitCustomizedTravelMessage' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/customizedtravel/submit',
+        					'defaults' => array(
+        							'controller'    => 'Application\Controller\Index',
+        							'action'        => 'submitcustomizedtravelmessage',
+        					),
+        			),
+        	),
 
         	'areaDetail' => array(
         			'type' => 'segment',
