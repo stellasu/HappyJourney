@@ -1,0 +1,33 @@
+<div class="content">
+	<div class="contact">
+		<div class="container">
+			<div class="contact-grids">
+				<div class="col-md-6 contact-right">
+					<form id="ct-customer-submission-form" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+						<table id="ct-form-table1" class="bottom-space">
+						<span class="name-span error-message" style="margin-left:1em; display:none;">* 请填写您的姓名</span>
+							<tr id="ct-last-name"><td><label>姓：</label><span>&nbsp;*</span></td><td><input type="text"></td></tr>
+							<tr id="ct-first-name"><td><label>名：</label><span>&nbsp;*</span></td><td><input type="text"></td></tr>
+						</table>
+						<table id="ct-form-table2" class="bottom-space">
+							<span class="contact-span error-message" style="margin-left:1em; display:none;">* 请至少填写以下一种联系方式</span>
+							<tr id="ct-phone"><td><label>电话号码：&nbsp;<strong>+1</strong></label></td><td><input type="text"></td></tr>
+							<tr id="ct-email"><td><label>邮箱：</label></td><td><input type="text"></td></tr>
+							<tr id="ct-wechat"><td><label>微信号：</label></td><td><input type="text"></td></tr>
+						</table>
+						<br>
+						<span class="message-span error-message" style="margin-left:1em; margin-bottom:1em; display:none;">* 请填写留言</span>
+						<span id="ct-message-label" style="margin-left:1em; font-size:15px;"><label>留言：&nbsp;*</label></span>
+						<span id="ct-message-textarea" style="margin-left:1em;"><textarea></textarea></span>
+						<input id="ct-customer-submission-form-submit" type="button" value="提交" style="margin-left:1em; margin-top: 1em;" >
+				 	 </form>
+				 	 <div id="ct-customer-submission-error-message" style="color:red;"><ul></ul></div>
+				</div>
+				<div class="col-md-6 contact-left">
+					<p><?php echo $this->results->text;?></p>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>		
+</div>

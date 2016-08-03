@@ -31,6 +31,8 @@ jQuery(document).ready(function($) {
 	//get current url and append to customized_travel_url
 	var customized_travel_url = "http://"+window.location.host+"/customizedtravel";
 	$("body").find(".customized-travel-dropdown-toggle").attr("href", customized_travel_url);
+	var shuttle_url = "http://"+window.location.host+"/shuttleservice";
+	$("#shuttle-tab-header a").attr("href", shuttle_url);
 	
 	/**
 	 * get current url and decide which tab should be highlighted
