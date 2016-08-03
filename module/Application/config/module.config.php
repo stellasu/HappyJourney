@@ -67,8 +67,8 @@ return array(
         			'options' => array(
         					'route'    => '/customizedtravel',
         					'defaults' => array(
-        							'controller'    => 'Application\Controller\Index',
-        							'action'        => 'customizedtravel',
+        							'controller'    => 'Application\Controller\CustomizedTravel',
+        							'action'        => 'index',
         					),
         			),
         	),
@@ -78,7 +78,7 @@ return array(
         			'options' => array(
         					'route'    => '/customizedtravel/submit',
         					'defaults' => array(
-        							'controller'    => 'Application\Controller\Index',
+        							'controller'    => 'Application\Controller\CustomizedTravel',
         							'action'        => 'submitcustomizedtravelmessage',
         					),
         			),
@@ -89,11 +89,23 @@ return array(
         			'options' => array(
         					'route'    => '/area/detail/:id',
         					'defaults' => array(
-        							'controller'    => 'Application\Controller\Area',
+        							'controller'    => 'Application\Controller\CustomizedTravel',
         							'action'        => 'detail',
         					),
         			),
         	),
+        		
+        	'shuttleservice' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/shuttleservice',
+        					'defaults' => array(
+        							'controller'    => 'Application\Controller\ShuttleService',
+        							'action'        => 'index',
+        					),
+        			),
+        	),
+        		
         ),
     ),
     'service_manager' => array(
@@ -116,7 +128,8 @@ return array(
     'controllers' => array(
         'invokables' => array(
             'Application\Controller\Index' => 'Application\Controller\IndexController',
-        	'Application\Controller\Area' => 'Application\Controller\AreaController'
+        	'Application\Controller\CustomizedTravel' => 'Application\Controller\CustomizedTravelController',
+        	'Application\Controller\ShuttleService' => 'Application\Controller\ShuttleServiceController'
         ),
     ),
     'view_manager' => array(
