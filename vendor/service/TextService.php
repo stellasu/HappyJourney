@@ -14,6 +14,7 @@ class TextService {
 	 * define text types
 	 */
 	const CT_MAIN_DESCRIPTION = 1; //Description on main page of customized travel
+	const SS_MAIN_DESCRIPTION = 2; //Description on main page of shuttle service
 	
 	public function __construct(ServiceLocatorInterface $serviceLocator){
 		$this->serviceLocator = $serviceLocator;
@@ -23,6 +24,11 @@ class TextService {
 	public function getCustomizedTravelMainDescription()
 	{
 		return $this->getMostRecentText(self::CT_MAIN_DESCRIPTION);
+	}
+	
+	public function getShuttleServiceMainDescription()
+	{
+		return $this->getMostRecentText(self::SS_MAIN_DESCRIPTION);
 	}
 	
 	/**
