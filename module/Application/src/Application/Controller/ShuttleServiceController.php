@@ -17,7 +17,7 @@ class ShuttleServiceController extends AbstractActionController {
 		} catch (\Exception $e) {
 			error_log("error: ".$e->getMessage());
 		}
-		$results = null;
+		$results = new \stdClass();
 		if($textResults != null){
 			$text = $textResults[0]->Text;
 			$results->text = $text;
