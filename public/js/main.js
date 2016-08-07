@@ -182,6 +182,9 @@ jQuery(document).ready(function($) {
 	 * pick a data in #ss-date-div
 	 */
 	$("#datepicker").datepicker();
+	$("#datepicker").mousedown(function() {
+	    $('#ui-datepicker-div').toggle();
+	});
 	
 	
 });
