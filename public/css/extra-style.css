@@ -9,3 +9,31 @@ table.bottom-space {
 	font-size:14px;
 	color:red;
 }
+
+.rounded-border {
+	border: 2px solid;
+	border-radius: 8px;
+}
+
+.ss-selection-div {
+	padding: 8px;
+}
+
+.selection-ul {
+	list-style-type: none; 
+}
+
+.selection-ul li {
+	border: 1px solid;
+	border-color: #A9A9A9;
+	margin: 3px 0px; 
+	padding: 0.4em; 
+}
+
+.selected-li {
+	background-color: #A9A9A9;
+}
+
+.unselected-li {
+	background-color: transparent;
+}
