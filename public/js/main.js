@@ -141,7 +141,51 @@ jQuery(document).ready(function($) {
 				}
 			});
 		}
-	})
+	});
+	
+	/**
+	 * on shuttle-service main page, when click on the header of the destination
+	 * selection div, open the drop down
+	 */
+	$("#ss-destination-div .ss-selection-header").click(function(e){
+		e.preventDefault();
+		var contentDiv = $(this).parent().find(".ss-selection-content");
+		contentDiv.slideDown();
+	});
+	
+	/**
+	 * on shuttle-service main page, if a confirm button is clicked, the next div will open
+	 */
+	$("#ss-destination-div button").click(function(e){
+		$("#ss-date-div").slideDown();
+	});
+	$("#ss-date-div button").click(function(e){
+		$("#ss-time-div").slideDown();
+	});
+	$("#ss-time-div button").click(function(e){
+		$("#ss-itinerary-div").slideDown();
+		$("#ss-submit").css("display","block");
+	});
+	
+	/**
+	 * select a value in #ss-destination-div
+	 */
+	$("#ss-destination-div li").click(function(e){
+		$(this).parent().find("li").removeClass("selected-li")
+								 .addClass("unselected-li");
+		$(this).addClass("selected-li")
+			   .removeClass("unselected-li");
+		
+	});
+	
+	/**
+	 * pick a data in #ss-date-div
+	 */
+	$("#datepicker").datepicker();
+	$("#datepicker").mousedown(function() {
+	    $('#ui-datepicker-div').toggle();
+	});
+	
 	
 });
 

@@ -9,3 +9,54 @@ table.bottom-space {
 	font-size:14px;
 	color:red;
 }
+
+.rounded-border {
+	border: 2px solid;
+	border-radius: 8px;
+}
+
+.ss-selection-div {
+	padding: 8px;
+}
+
+.selection-ul {
+	list-style-type: none; 
+}
+
+.selection-ul li {
+	border: 1px solid #ccc;
+	margin: 3px 0px; 
+	padding: 5px; 
+}
+
+.selected-li {
+	background-color: #ccc;
+}
+
+.dropdown-ul {
+	list-style-type: none; 
+}
+
+.unselected-li {
+	background-color: transparent;
+}
+
+#ss-time-div select {
+    background: transparent;
+    width: 100px;
+    margin: 5px 0px 10px 0px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    height: 34px;
+}
+
+/* disable dropdown list default style */
+select {
+	-webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+/* for IE 11 */
+select::-ms-expand { 
+    display: none;
+}
