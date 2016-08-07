@@ -14,7 +14,9 @@
 									))->prependStylesheet ( $this->basePath () . '/css/bootstrap.css' )
         								->prependStylesheet ( $this->basePath () . '/css/style.css' )
         								->prependStylesheet ( $this->basePath () . '/css/extra-style.css' )
-        								->prependStylesheet ( $this->basePath () . '/css/flexslider.css' )?>
+        								->prependStylesheet ( $this->basePath () . '/css/flexslider.css' )
+        								->prependStylesheet ( 'https://code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css' )
+        ?>
         <link href='//fonts.googleapis.com/css?family=Open+Sans:400,800italic,800,700italic,700,600italic,600,400italic,300italic,300' rel='stylesheet' type='text/css'>
 
 		<!-- Scripts -->
@@ -22,6 +24,7 @@
         								->prependFile ( $this->basePath () . '/js/jquery.flexslider.js' )
         								->prependFile ( $this->basePath () . '/js/main.js' ) 
         								->prependFile ( $this->basePath () . '/js/bootstrap.js' )
+        								->prependFile ( 'https://code.jquery.com/ui/1.12.0/jquery-ui.js' )
         								->prependFile ( $this->basePath () . '/js/jquery-1.11.1.min.js' )
         ?>
 </head>
