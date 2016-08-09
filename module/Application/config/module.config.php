@@ -106,6 +106,17 @@ return array(
         			),
         	),
         		
+        	'listitinerary' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/listitinerary',
+        					'defaults' => array(
+        							'controller'    => 'Application\Controller\ShuttleService',
+        							'action'        => 'listItinerary',
+        					),
+        			),
+        	),
+        		
         ),
     ),
     'service_manager' => array(
