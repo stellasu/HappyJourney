@@ -8,6 +8,7 @@ table.bottom-space {
 	font-style:italic;
 	font-size:14px;
 	color:red;
+	display: none;
 }
 
 .rounded-border {
@@ -59,4 +60,8 @@ select {
 /* for IE 11 */
 select::-ms-expand { 
     display: none;
+}
+
+input {
+	height: 34px;
 }

@@ -6,6 +6,8 @@ use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 use Service\TextService;
 use Service\DestinationService;
+use Service\ItineraryService;
+use Service\Service;
 
 class ShuttleServiceController extends AbstractActionController {
 	
@@ -39,6 +41,26 @@ class ShuttleServiceController extends AbstractActionController {
 			$results->destinations = null;
 		}
 		$view->setVariables(array('results'=>$results));
+		return $view;
+    }
+    
+    public function listItineraryAction()
+    {
+    	$view = new JsonModel();
+    	$view->setTerminal(true);
+    	if($this->getRequest()->isPost()){
+    		$postParams = $this->params()->fromPost();
+    		$itineraryService = new ItineraryService($this->serviceLocator);
+    		$results = $itineraryService->getQualifiedItineraries($postParams);
+    		if($results != null){
+    			$response = array('success'=>true, 'result'=>$results);
+    		}else{
+    			$response = array('success'=>false, 'result'=>null);
+    		}
+    	}else{
+			$response = array('success'=>false, 'result'=>null);
+		}
+		$view->setVariables($response);
 		return $view;
     }
 	

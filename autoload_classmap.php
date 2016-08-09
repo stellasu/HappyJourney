@@ -1936,6 +1936,7 @@ return array(
     'Service\CustomerSubmissionService'                                                   => __DIR__ . '/vendor/service/CustomerSubmissionService.php',
     'Service\TextService'                                                                 => __DIR__ . '/vendor/service/TextService.php',
     'Service\DestinationService'                                                          => __DIR__ . '/vendor/service/DestinationService.php',
+    'Service\ItineraryService'                                                            => __DIR__ . '/vendor/service/ItineraryService.php',
     'Symfony\Component\Console\Application'                                               => __DIR__ . '/vendor/symfony/console/Application.php',
     'Symfony\Component\Console\Command\Command'                                           => __DIR__ . '/vendor/symfony/console/Command/Command.php',
     'Symfony\Component\Console\Command\HelpCommand'                                       => __DIR__ . '/vendor/symfony/console/Command/HelpCommand.php',
