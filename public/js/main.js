@@ -181,9 +181,43 @@ jQuery(document).ready(function($) {
 	/**
 	 * pick a data in #ss-date-div
 	 */
-	$("#datepicker").datepicker();
-	$("#datepicker").mousedown(function() {
+	$("#ss-date-div .datepicker").datepicker();
+	$("#ss-date-div .datepicker").mousedown(function() {
 	    $('#ui-datepicker-div').toggle();
+	});
+	
+	/**
+	 * submit shuttle service form to get itineraries
+	 */
+	$("#ss-submit").click(function(e){
+		//check if all fields are filled
+		var allset = true;
+		if($(".selected-li").length > 0){
+			var destination = $(".selected-li").data("destinationid");
+			$("#ss-destination-error").css("display", "none");
+		}else{
+			allset = false;
+			$("#ss-destination-error").css("display", "block");
+		}
+		if($("#ss-date-div .datepicker").val() != ""){
+			var date = $("#ss-date-div .datepicker").val();
+			$("#ss-date-error").css("display", "none");
+		}else{
+			allset = false;
+			$("#ss-date-error").css("display", "block");
+		}
+		if($("#ss-hour-select").val()!=null && $("#ss-minute-select").val()!=null){
+			var hour = $("#ss-hour-select").val();
+			var minute = $("#ss-minute-select").val();
+			$("#ss-time-error").css("display", "none");
+		}else{
+			allset = false;
+			$("#ss-time-error").css("display", "block");
+		}
+		if(allset == true){
+			
+		}
+		
 	});
 	
 	
