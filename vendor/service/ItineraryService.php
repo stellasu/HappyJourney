@@ -23,10 +23,10 @@ class ItineraryService {
 	public function getQualifiedItineraries(Array $data = null){
 		if(isset($data['DestinationId'])&&$data['DestinationId']!=null
 				&& isset($data['Date'])&&$data['Date']!=null
-				&& isset($data['Time'])&&$data['Time']!=null){
+				&& isset($data['Hour'])&&$data['Hour']!=null){
 			try {
-				$query = "Select * from Itinerary Where DestinationId = ? And Date = ? And Time = ? And Deleted = 0";
-				$values = array(intval($data['DestinationId']), $data['Date'], $data['Time']);
+				$query = "Select * from Itinerary Where DestinationId = ? And Date = ? And Hour = ? And Deleted = 0";
+				$values = array(intval($data['DestinationId']), $data['Date'], $data['Hour']);
 				$sqlResult = $this->db->createStatement($query, $values)->execute();
 				$returnArray = null;
 				if ($sqlResult instanceof ResultInterface && $sqlResult->isQueryResult()) {
