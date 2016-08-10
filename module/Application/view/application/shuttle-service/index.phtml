@@ -36,30 +36,21 @@
 							  <option value="<?php echo $i;?>"><?php echo $i;?></option>
 							  <?php endfor;?>
 							</select>
-							点&nbsp
-							<select id="ss-minute-select">
-							  <option value="" disabled selected>----</option>
-							  <?php for($i=0; $i<59; $i++):?>
-							  <option value="<?php echo $i;?>"><?php echo $i<10?("0".$i):$i;?></option>
-							  <?php endfor;?>
-							</select>
-							分
+							点
 							<br>
-						 	<button class="ss-selection-btn">确认</button>
 					 	</div>
 					</div>
 					<div id="ss-time-error" class="error-message">* 请选择时间</div>
 					<br>
+					<button id="ss-submit" class="ss-selection-btn" style="display:none;">确认提交</button>
+					<br>
 					<div id="ss-itinerary-div" class="rounded-border ss-selection-div" style="display: none;">
 					 	<div class="ss-selection-header">选择车次</div>
 					 	<div class="ss-selection-content">
-					 	San Diego<br>
-					 	Los Angeles<br>
+					 	<span>请等待...</span>
 					 	</div>
 					</div>
 					<div id="ss-itinerary-error" class="error-message">* 请选择车次</div>
-					<br>
-					<button id="ss-submit" class="ss-selection-btn" style="display:none;">确认提交</button>
 				</div>
 				<div class="col-md-6 contact-left">
 					<p><?php echo $this->results->text;?></p>

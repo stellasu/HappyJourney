@@ -161,9 +161,6 @@ jQuery(document).ready(function($) {
 	});
 	$("#ss-date-div button").click(function(e){
 		$("#ss-time-div").slideDown();
-	});
-	$("#ss-time-div button").click(function(e){
-		$("#ss-itinerary-div").slideDown();
 		$("#ss-submit").css("display","block");
 	});
 	
@@ -206,18 +203,62 @@ jQuery(document).ready(function($) {
 			allset = false;
 			$("#ss-date-error").css("display", "block");
 		}
-		if($("#ss-hour-select").val()!=null && $("#ss-minute-select").val()!=null){
+		if($("#ss-hour-select").val()!=null){
 			var hour = $("#ss-hour-select").val();
-			var minute = $("#ss-minute-select").val();
 			$("#ss-time-error").css("display", "none");
 		}else{
 			allset = false;
 			$("#ss-time-error").css("display", "block");
 		}
-		if(allset == true){
-			
+		if(allset == true){ //submit to fetch qualified itineraries
+			//prepare date value
+			var month = date.slice(0,2);
+			var day = date.slice(3,5);
+			var year = date.slice(6);
+			var datestring = year.concat(month, day);
+			$.ajax({
+				url:"/listitinerary",
+				dataType:"json",
+				type:"post",
+				data:{DestinationId:destination,
+					Date:datestring,
+					Hour:hour},
+				success: function(response) {
+					$("#ss-itinerary-div .ss-selection-content").html("<ul class='selection-ul'></ul>");
+					if(response.success){
+						$.each(response.result, function(i,val){
+							if(val.Hour < 12){
+								var ampm = 'am';
+							}else{
+								var ampm = 'pm';
+							}
+							$("#ss-itinerary-div ul").append("<li class='unselected-li' data-itineraryid="+val.Id+">"+val.Hour+": "+val.Minute+" "+ampm+", "+val.Vehicle+"</li>");
+						});
+					}else{
+						$("#ss-itinerary-div .ss-selection-content").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会和您联系。</span>");					
+					}
+				},
+				beforeSend: function() {
+					$("#ss-itinerary-div").slideDown();
+					
+				},
+				error: function(xhr, status, error) {
+					console.log(xhr.responseText);
+				}
+			});
 		}
 		
+	});
+	
+	/**
+	 * select a value in #ss-itinerary-div
+	 */
+	$("#ss-itinerary-div li").click(function(e){
+		console.log("click");
+		$(this).parent().find("li").removeClass("selected-li")
+								 .addClass("unselected-li");
+		$(this).addClass("selected-li")
+			   .removeClass("unselected-li");		
 	});
 	
 	
