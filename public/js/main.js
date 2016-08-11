@@ -189,8 +189,8 @@ jQuery(document).ready(function($) {
 	$("#ss-submit").click(function(e){
 		//check if all fields are filled
 		var allset = true;
-		if($(".selected-li").length > 0){
-			var destination = $(".selected-li").data("destinationid");
+		if($("#ss-destination-div .selected-li").length > 0){
+			var destination = $("#ss-destination-div .selected-li").data("destinationid");
 			$("#ss-destination-error").css("display", "none");
 		}else{
 			allset = false;
@@ -224,23 +224,34 @@ jQuery(document).ready(function($) {
 					Date:datestring,
 					Hour:hour},
 				success: function(response) {
-					$("#ss-itinerary-div .ss-selection-content").html("<ul class='selection-ul'></ul>");
 					if(response.success){
+						$("#ss-itinerary-div .content-loading").css("display", "none");
+						$("#ss-itinerary-div .content-loaded").css("display", "block");
+						$("#ss-itinerary-div .ss-selection-content").html("<ul class='selection-ul'></ul>");
 						$.each(response.result, function(i,val){
 							if(val.Hour < 12){
 								var ampm = 'am';
 							}else{
 								var ampm = 'pm';
 							}
-							$("#ss-itinerary-div ul").append("<li class='unselected-li' data-itineraryid="+val.Id+">"+val.Hour+": "+val.Minute+" "+ampm+", "+val.Vehicle+"</li>");
+							var itinerary_li = $("<li class='unselected-li' data-itineraryid="+val.Id+">"+val.Hour+": "+val.Minute+" "+ampm+", "+val.Vehicle+"</li>");
+							itinerary_li.click(function(e){
+								$(this).parent().find("li").removeClass("selected-li")
+														 .addClass("unselected-li");
+								$(this).addClass("selected-li")
+									   .removeClass("unselected-li");	
+							});
+							$("#ss-itinerary-div ul").append(itinerary_li);
 						});
 					}else{
-						$("#ss-itinerary-div .ss-selection-content").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会和您联系。</span>");					
+						$("#ss-itinerary-div .content-loading").css("display", "block");
+						$("#ss-itinerary-div .content-loaded").css("display", "none");
+						$("#ss-itinerary-div .content-loading").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会和您联系。</span>");					
 					}
 				},
 				beforeSend: function() {
-					$("#ss-itinerary-div").slideDown();
-					
+					$("#ss-itinerary-div").slideDown();	
+					$("#ss-itinerary-div .content-loading").css("display", "block");
 				},
 				error: function(xhr, status, error) {
 					console.log(xhr.responseText);
@@ -251,16 +262,28 @@ jQuery(document).ready(function($) {
 	});
 	
 	/**
-	 * select a value in #ss-itinerary-div
+	 * on ss_main page, user confirms a itinerary
 	 */
-	$("#ss-itinerary-div li").click(function(e){
-		console.log("click");
-		$(this).parent().find("li").removeClass("selected-li")
-								 .addClass("unselected-li");
-		$(this).addClass("selected-li")
-			   .removeClass("unselected-li");		
+	$("#ss-itinerary-div .ss-selection-button").click(function(e){
+		if($("#ss-itinerary-div .selected-li").length > 0){
+			$("#ss-submission-div").slideDown();
+			$("#ss-itinerary-error").css("display", "none");
+			$("#ss-submission-div .ss-selection-header").html("请填写以下表格，以便我们和您联系（*为必填项）");
+			$("#ss-message-label").find("label").html("留言：");
+		}else{
+			$("#ss-itinerary-error").css("display", "block");
+		}
 	});
-	
+
+	/**
+	 * on ss_main page, use clicks "no-itinerary-available-link"
+	 */
+	$("#no-itinerary-available-link").click(function(e){
+		$("#ss-submission-div").slideDown();
+		$("#ss-itinerary-error").css("display", "none");
+		$("#ss-submission-div .ss-selection-header").html("请填写以下表格，我们将为您定制行程（*为必填项）");
+		$("#ss-message-label").find("label").html("留言：&nbsp;*");
+	});
 	
 });
 

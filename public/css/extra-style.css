@@ -65,3 +65,13 @@ select::-ms-expand {
 input {
 	height: 34px;
 }
+
+.clickable {
+	cursor: pointer;
+}
+
+.fakelink {
+	text-decoration: underline;
+	color: blue;
+	font-style: italic;
+}

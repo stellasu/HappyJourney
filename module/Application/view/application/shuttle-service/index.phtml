@@ -45,13 +45,44 @@
 					<button id="ss-submit" class="ss-selection-btn" style="display:none;">确认提交</button>
 					<br>
 					<div id="ss-itinerary-div" class="rounded-border ss-selection-div" style="display: none;">
-					 	<div class="ss-selection-header">选择车次</div>
-					 	<div class="ss-selection-content">
-					 	<span>请等待...</span>
+					 	<div class="content-loading"><span>请等待...</span></div>
+					 	<div class="content-loaded" style="display: block;">
+						 	<div class="ss-selection-header">选择车次</div>
+						 	<div class="ss-selection-content">
+						 	</div>
+						 	<button class="ss-selection-button">确认选择</button>
 					 	</div>
 					</div>
 					<div id="ss-itinerary-error" class="error-message">* 请选择车次</div>
+					<br>
+					<div style="margin-top: 10px;"><span id="no-itinerary-available-link" class="clickable fakelink">没有符合要求的车次?</span></div>
+					<br>
+					<div id="ss-submission-div" class="rounded-border ss-selection-div" style="display: none;">
+					 	<div class="ss-selection-header"></div>
+						<div class="ss-selection-content">
+							<form id="ss-submission-form" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+								<table id="ss-form-table1" class="bottom-space">
+								<span class="name-span error-message" style="margin-left:1em; display:none;">* 请填写您的姓名</span>
+									<tr id="ct-last-name"><td><label>姓：</label><span>&nbsp;*</span></td><td><input type="text"></td></tr>
+									<tr id="ct-first-name"><td><label>名：</label><span>&nbsp;*</span></td><td><input type="text"></td></tr>
+								</table>
+								<table id="ss-form-table2" class="bottom-space">
+									<span class="contact-span error-message" style="margin-left:1em; display:none;">* 请至少填写以下一种联系方式</span>
+									<tr id="ss-phone"><td><label>电话号码：&nbsp;<strong>+1</strong></label></td><td><input type="text"></td></tr>
+									<tr id="ss-email"><td><label>邮箱：</label></td><td><input type="text"></td></tr>
+									<tr id="ss-wechat"><td><label>微信号：</label></td><td><input type="text"></td></tr>
+								</table>
+								<br>
+								<span class="message-span error-message" style="margin-left:1em; margin-bottom:1em; display:none;">* 请填写留言</span>
+								<span id="ss-message-label" style="margin-left:1em; font-size:15px;"><label>留言：&nbsp;*</label></span>
+								<span id="ss-message-textarea" style="margin:1em;"><textarea style="width: 95%;"></textarea></span>
+								<input id="ss-submission-form-submit" type="button" value="提交" style="margin-left:1em; margin-top: 1em;" >
+						 	</form>
+						</div>				 	
+					 	<div id="ss-submission-error-message" style="color:red;"><ul></ul></div>
+					</div>
 				</div>
+				
 				<div class="col-md-6 contact-left">
 					<p><?php echo $this->results->text;?></p>
 				</div>
