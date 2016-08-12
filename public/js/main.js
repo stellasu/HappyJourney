@@ -217,7 +217,7 @@ jQuery(document).ready(function($) {
 			var year = date.slice(6);
 			var datestring = year.concat(month, day);
 			$.ajax({
-				url:"/listitinerary",
+				url:"/shuttleservice/listitinerary",
 				dataType:"json",
 				type:"post",
 				data:{DestinationId:destination,
