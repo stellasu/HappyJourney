@@ -85,21 +85,21 @@ jQuery(document).ready(function($) {
 		var ready = true;
 		if(firstname=='' || lastname==''){
 			ready = false;
-			$("span.name-span").css("display","inline");
+			$("#ct-submission-div span.name-span").css("display","inline");
 		}else{
-			$("span.name-span").css("display","none");
+			$("#ct-submission-div span.name-span").css("display","none");
 		}
 		if(phone=='' && email=='' && wechat==''){
 			ready = false;
-			$("span.contact-span").css("display","inline");
+			$("#ct-submission-div span.contact-span").css("display","inline");
 		}else{
-			$("span.contact-span").css("display","none");
+			$("#ct-submission-div span.contact-span").css("display","none");
 		}
 		if(message==''){
 			ready = false;
-			$("span.message-span").css("display","block");
+			$("#ct-submission-div span.message-span").css("display","block");
 		}else{
-			$("span.message-span").css("display","none");
+			$("#ct-submission-div span.message-span").css("display","none");
 		}
 		if(ready){
 			console.log("ready to submit");
@@ -217,7 +217,7 @@ jQuery(document).ready(function($) {
 			var year = date.slice(6);
 			var datestring = year.concat(month, day);
 			$.ajax({
-				url:"/listitinerary",
+				url:"/shuttleservice/listitinerary",
 				dataType:"json",
 				type:"post",
 				data:{DestinationId:destination,
@@ -283,6 +283,86 @@ jQuery(document).ready(function($) {
 		$("#ss-itinerary-error").css("display", "none");
 		$("#ss-submission-div .ss-selection-header").html("请填写以下表格，我们将为您定制行程（*为必填项）");
 		$("#ss-message-label").find("label").html("留言：&nbsp;*");
+	});
+	
+	/**
+	 * user submit form in ss-main page
+	 */
+	$("#ss-submission-form-submit").click(function(e){
+		e.preventDefault();
+		$("#ss-submission-error-message ul").empty();
+		var firstname = $("#ss-first-name input").val();
+		var lastname = $("#ss-last-name input").val();
+		var phone = $("#ss-phone input").val();
+		var email = $("#ss-email input").val();
+		var wechat = $("#ss-wechat input").val();
+		var message = $("#ss-message-textarea textarea").val();
+		var ready = true;
+		if(firstname=='' || lastname==''){
+			ready = false;
+			$("#ss-submission-div span.name-span").css("display","inline");
+		}else{
+			$("#ss-submission-div span.name-span").css("display","none");
+		}
+		if(phone=='' && email=='' && wechat==''){
+			ready = false;
+			$("#ss-submission-div span.contact-span").css("display","inline");
+		}else{
+			$("#ss-submission-div span.contact-span").css("display","none");
+		}
+		if(message==''){
+			if($("#ss-itinerary-div .selected-li").length==0){
+				ready = false;
+				$("#ss-submission-div span.message-span").css("display","block");
+				var itineraryId = $("#ss-itinerary-div .selected-li").data("itineraryid");
+			}else{
+				$("#ss-submission-div span.message-span").css("display","none");
+				var itineraryId = null;
+			}			
+		}else{
+			$("#ss-submission-div span.message-span").css("display","none");
+		}
+		if(ready){
+			console.log("ready to submit");
+			var error_area = $("#ss-submission-error-message ul");
+			$.ajax({
+				url:"/shuttleservice/submit",
+				dataType:"json",
+				type:"post",
+				data:{firstname:firstname,
+					lastname:lastname,
+					phone:phone,
+					email:email,
+					wechat:wechat,
+					message:message,
+					itineraryId:itineraryId},
+				success: function(response) {
+					$("#ss-submission-form-submit").prop("disabled",false);
+					error_area.empty();
+					if(response.success){
+						$("#ss-submission-form")[0].reset();
+						error_area.append("已成功提交！工作人员将稍后联系您，谢谢您的耐心等待^_^");
+					}else{
+						if(response.result != null){
+							if("errors" in response.result){
+								$.each(response.result.errors, function(i,val){
+									error_area.append("<li>"+val+"</li>");
+								});
+							}
+						}						
+					}
+				},
+				beforeSend: function() {
+					$("#ss-submission-form-submit").prop("disabled",true);
+					error_area.append("请稍后，提交中……");
+				},
+				error: function(xhr, status, error) {
+					console.log(xhr.responseText);
+					$("#ss-submission-form-submit").prop("disabled",false);
+					error_area.empty();
+				}
+			});
+		}
 	});
 	
 });

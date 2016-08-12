@@ -63,5 +63,13 @@ class ShuttleServiceController extends AbstractActionController {
 		$view->setVariables($response);
 		return $view;
     }
+    
+    public function submitCustomerItineraryAction()
+    {
+    	$view = new JsonModel();
+    	$view->setTerminal(true);
+    	
+    	return $view;
+    }
 	
 }

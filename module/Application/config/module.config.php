@@ -109,13 +109,24 @@ return array(
         	'listitinerary' => array(
         			'type' => 'segment',
         			'options' => array(
-        					'route'    => '/listitinerary',
+        					'route'    => '/shuttleservice/listitinerary',
         					'defaults' => array(
         							'controller'    => 'Application\Controller\ShuttleService',
         							'action'        => 'listItinerary',
         					),
         			),
         	),
+        		
+        		'submitCustomerItinerary' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        						'route'    => '/shuttleservice/submit',
+        						'defaults' => array(
+        								'controller'    => 'Application\Controller\ShuttleService',
+        								'action'        => 'submitCustomerItinerary',
+        						),
+        				),
+        		),
         		
         ),
     ),
