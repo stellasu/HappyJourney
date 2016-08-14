@@ -89,7 +89,7 @@ class CustomizedTravelController extends AbstractActionController {
 				$response = array('success'=>false, 'result'=>array('errors'=>$errorArray));
 			}else{
 				$csService = new CustomerSubmissionService($this->serviceLocator);
-				if($csService->addCustomizedTravelSubmission($data)){
+				if($csService->addCustomizedTravelSubmission($data) != null){
 					$response = array('success'=>true, 'result'=>null);
 				}else{
 					$response = array('success'=>false, 'result'=>null);
