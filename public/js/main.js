@@ -246,11 +246,12 @@ jQuery(document).ready(function($) {
 					}else{
 						$("#ss-itinerary-div .content-loading").css("display", "block");
 						$("#ss-itinerary-div .content-loaded").css("display", "none");
-						$("#ss-itinerary-div .content-loading").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会和您联系。</span>");					
+						$("#ss-itinerary-div .content-loading").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会为您订制行程。</span>");					
 					}
 				},
 				beforeSend: function() {
 					$("#ss-itinerary-div").slideDown();	
+					$("#ss-itinerary-div .content-loaded").css("display", "none");
 					$("#ss-itinerary-div .content-loading").css("display", "block");
 				},
 				error: function(xhr, status, error) {
