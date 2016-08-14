@@ -297,6 +297,7 @@ jQuery(document).ready(function($) {
 		var email = $("#ss-email input").val();
 		var wechat = $("#ss-wechat input").val();
 		var message = $("#ss-message-textarea textarea").val();
+		var itineraryId = null;
 		var ready = true;
 		if(firstname=='' || lastname==''){
 			ready = false;
@@ -314,10 +315,9 @@ jQuery(document).ready(function($) {
 			if($("#ss-itinerary-div .selected-li").length==0){
 				ready = false;
 				$("#ss-submission-div span.message-span").css("display","block");
-				var itineraryId = $("#ss-itinerary-div .selected-li").data("itineraryid");
 			}else{
 				$("#ss-submission-div span.message-span").css("display","none");
-				var itineraryId = null;
+				itineraryId = $("#ss-itinerary-div .selected-li").data("itineraryid");
 			}			
 		}else{
 			$("#ss-submission-div span.message-span").css("display","none");
