@@ -1,3 +1,7 @@
+body {
+	font-size:1em;
+}
+
 table.bottom-space {
 	border-collapse:separate; 
 	border-spacing:1em;
@@ -9,6 +13,7 @@ table.bottom-space {
 	font-size:1em;
 	color:red;
 	display: none;
+	margin: 0.5em;
 }
 
 .rounded-border {
