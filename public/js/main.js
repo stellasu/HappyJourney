@@ -246,7 +246,8 @@ jQuery(document).ready(function($) {
 					}else{
 						$("#ss-itinerary-div .content-loading").css("display", "block");
 						$("#ss-itinerary-div .content-loaded").css("display", "none");
-						$("#ss-itinerary-div .content-loading").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会为您订制行程。</span>");					
+						$("#ss-itinerary-div .content-loading").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会为您订制行程。</span>");	
+						$("#ss-submission-div").slideDown();
 					}
 				},
 				beforeSend: function() {
