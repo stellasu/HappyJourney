@@ -13,7 +13,7 @@ jQuery(document).ready(function($) {
 				var item = "<li><a href='http://"+window.location.host+"/area/detail/"+val.Id+"' data-areaId="+val.Id+">"+val.Name+"</a></li>";
 				ctDropdown.append(item);
 			});
-			ctDropdown.append('<li style="padding-left:80px; cursor:default;" onclick="foldAreaList();">[收起]</li>');
+			ctDropdown.append('<li style="padding-left:5em; cursor:default;" onclick="foldAreaList();">[收起]</li>');
 		},
 		beforeSend: function() {
 			console.log("fetching areas ...");
@@ -246,7 +246,8 @@ jQuery(document).ready(function($) {
 					}else{
 						$("#ss-itinerary-div .content-loading").css("display", "block");
 						$("#ss-itinerary-div .content-loaded").css("display", "none");
-						$("#ss-itinerary-div .content-loading").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会为您订制行程。</span>");					
+						$("#ss-itinerary-div .content-loading").html("<span>对不起，没有符合您要求的车次。请填写表格，我们的客服将会为您订制行程。</span>");	
+						$("#ss-submission-div").slideDown();
 					}
 				},
 				beforeSend: function() {

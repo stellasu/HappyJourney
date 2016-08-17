@@ -1,23 +1,32 @@
+* {
+	font-size:1em;
+	font-family: Georgia, "Times New Roman", 
+             "Microsoft YaHei", "微软雅黑", 
+             STXihei, "华文细黑", 
+             serif;
+}
+
 table.bottom-space {
 	border-collapse:separate; 
 	border-spacing:1em;
-	font-size:15px;
+	font-size:1em;
 }
 
 .error-message {
 	font-style:italic;
-	font-size:14px;
+	font-size:1em;
 	color:red;
 	display: none;
+	margin: 0.5em;
 }
 
 .rounded-border {
 	border: 2px solid;
-	border-radius: 8px;
+	border-radius: 0.5em;
 }
 
 .ss-selection-div {
-	padding: 8px;
+	padding: 0.5em;
 }
 
 .selection-ul {
@@ -44,11 +53,11 @@ table.bottom-space {
 
 #ss-time-div select {
     background: transparent;
-    width: 100px;
+    width: 6.25em;
     margin: 5px 0px 10px 0px;
     padding: 5px;
     border: 1px solid #ccc;
-    height: 34px;
+    height: 2.125em;
 }
 
 /* disable dropdown list default style */
@@ -63,7 +72,7 @@ select::-ms-expand {
 }
 
 input {
-	height: 34px;
+	height: 2.125em;
 }
 
 .clickable {
