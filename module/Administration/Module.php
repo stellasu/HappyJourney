@@ -11,6 +11,10 @@ namespace Administration;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Authentication\Storage;
+use Zend\Authentication\AuthenticationService;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 
 class Module
 {
@@ -40,4 +44,5 @@ class Module
         	),
         );
     }
+    
 }

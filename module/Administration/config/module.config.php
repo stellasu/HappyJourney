@@ -62,6 +62,17 @@ return array(
         			),
         	),  
         		
+        		'auth' => array(
+        				'type' => 'segment',
+        				'options' => array(
+        						'route'    => '/administration/authenticate',
+        						'defaults' => array(
+        								'controller'    => 'Administration\Controller\Auth',
+        								'action'        => 'authenticate',
+        						),
+        				),
+        		),
+        		
         ),
     ),
     'service_manager' => array(
@@ -85,6 +96,7 @@ return array(
         'invokables' => array(
             'Administration\Controller\Index' => 'Administration\Controller\IndexController',
         	'Administration\Controller\Login' => 'Administration\Controller\LoginController',
+        	'Administration\Controller\Auth' => 'Administration\Controller\AuthController',
         ),
     ),
     'view_manager' => array(
