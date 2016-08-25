@@ -1,5 +1,5 @@
 <?php
-namespace Service;
+namespace Administration\Model;
 
 use Zend\Authentication\Storage;
 

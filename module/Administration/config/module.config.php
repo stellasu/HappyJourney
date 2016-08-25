@@ -122,7 +122,10 @@ return array(
 		'entity_path' => array(
 			__DIR__ . '/../src/Administration/Model/Entity/',
 		),
-	)
+	),
+		'invokables' => array(
+				//'Zend\Authentication\AuthenticationService' => 'Zend\Authentication\AuthenticationService',
+		),
 		
 		
 );
