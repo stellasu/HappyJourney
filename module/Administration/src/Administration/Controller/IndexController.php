@@ -13,6 +13,8 @@ use Doctrine\ORM\EntityManager;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Zend\Session\Container;
+use Zend\Session\Zend\Session;
 
 class IndexController extends AbstractActionController
 {
@@ -20,9 +22,12 @@ class IndexController extends AbstractActionController
 	public function indexAction()
     {
     	$view = new ViewModel();
-    	//$config = $this->getServiceLocator()->get('config');
-    	//$view->configs = $config['configs'];
-    	return $view;
+    	$authService = $this->getServiceLocator()->get('AuthService');
+    	$session = new Container('HJ');
+    	if ($authService->getIdentity() != null){
+    		return $view;
+    	}
+    	return $this->redirect()->toRoute('login');    	
     }
     
 }

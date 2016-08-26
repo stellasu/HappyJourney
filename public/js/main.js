@@ -367,6 +367,35 @@ jQuery(document).ready(function($) {
 		}
 	});
 	
+	/**
+	 * admin login
+	 */
+	$("#loginSubmit").click(function(e){
+		var username = $("#username").val();
+		var password = $("#password").val();
+		console.log("un: "+username);
+		$.ajax({
+			url:"/administration/authenticate",
+			dataType:"json",
+			type:"post",
+			data:{username:username,
+				password:password},
+			success: function(response) {
+				if(response.success){
+					window.location.href = "http://happyjourney.local/administration";
+				}else{
+										
+				}
+			},
+			beforeSend: function() {
+				
+			},
+			error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			}
+		});
+	});
+	
 });
 
 /**

@@ -11,6 +11,13 @@ namespace Administration;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\Authentication\AuthenticationService;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
+use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
+use Zend\Session\Config\SessionConfig;
+use Zend\Session\Container;
+use Zend\Session\SessionManager;
+use Zend\Authentication\Storage\Session as SessionStorage;
 
 class Module
 {
@@ -20,6 +27,12 @@ class Module
         $eventManager        = $e->getApplication()->getEventManager();
         $moduleRouteListener = new ModuleRouteListener();
         $moduleRouteListener->attach($eventManager);
+        
+        $this->initSession(array(
+        		'remember_me_seconds' => 604800, //one week
+        		'use_cookies' => true,
+        		'cookie_httponly' => true,
+        ));
     }
 
     public function getConfig()
@@ -39,5 +52,35 @@ class Module
         			__DIR__ . '/../../autoload_classmap.php',
         	),
         );
+    }
+    
+    public function getServiceConfig()
+    {
+    	return array(
+    		'factories'=>array(
+    			 'AuthStorage' => function($sm){
+    				return new SessionStorage();
+    			}, 
+    					 
+    			'AuthService' => function($sm) {
+	    			$dbAdapter           = $sm->get('Zend\Db\Adapter\Adapter');
+	    			$dbTableAuthAdapter  = new DbTableAuthAdapter($dbAdapter, 'Administrator','Username','Password');
+					$authService = new AuthenticationService();
+	    			$authService->setAdapter($dbTableAuthAdapter);
+	    			$authService->setStorage($sm->get('AuthStorage'));
+	    			
+	    			return $authService;
+    			},
+    		),
+    	);
+    }
+    
+    public function initSession($config)
+    {
+    	$sessionConfig = new SessionConfig();
+    	$sessionConfig->setOptions($config);
+    	$sessionManager = new SessionManager($sessionConfig);
+    	$sessionManager->start();
+    	Container::setDefaultManager($sessionManager);
     }
 }
