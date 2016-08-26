@@ -17,9 +17,7 @@ use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container;
 use Zend\Session\SessionManager;
-//use Zend\Authentication\Storage;
-//use Zend\Authentication\Storage\Session as SessionStorage;
-
+use Zend\Authentication\Storage\Session as SessionStorage;
 
 class Module
 {
@@ -61,7 +59,6 @@ class Module
     	return array(
     		'factories'=>array(
     			 'AuthStorage' => function($sm){
-    				//return new Model\AuthStorage('hj');
     				return new SessionStorage();
     			}, 
     					 
@@ -70,9 +67,8 @@ class Module
 	    			$dbTableAuthAdapter  = new DbTableAuthAdapter($dbAdapter, 'Administrator','Username','Password');
 					$authService = new AuthenticationService();
 	    			$authService->setAdapter($dbTableAuthAdapter);
-	    			//$authService->setStorage($sm->get('AuthStorage'));
-	    			//$authService->setStorage(new SessionStorage());
-	    
+	    			$authService->setStorage($sm->get('AuthStorage'));
+	    			
 	    			return $authService;
     			},
     		),

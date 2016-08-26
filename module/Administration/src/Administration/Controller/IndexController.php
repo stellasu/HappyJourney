@@ -24,11 +24,10 @@ class IndexController extends AbstractActionController
     	$view = new ViewModel();
     	$authService = $this->getServiceLocator()->get('AuthService');
     	$session = new Container('HJ');
-    	//if ($authService->getIdentity() != null){
-    	if($session->authenticated){
+    	if ($authService->getIdentity() != null){
     		return $view;
     	}
-    	return $this->redirect()->toRoute('/administration/login');    	
+    	return $this->redirect()->toRoute('login');    	
     }
     
 }

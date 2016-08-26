@@ -30,7 +30,7 @@ class AuthController extends AbstractActionController
 	 
 	public function getSessionStorage()
 	{
-		if (! $this->storage) {
+		if (!$this->storage) {
 			$this->storage = $this->getServiceLocator()
 			->get('AuthStorage');
 		}		 
@@ -65,9 +65,9 @@ class AuthController extends AbstractActionController
 						$this->getSessionStorage()
 						->setRememberMe(1);
 						//set storage again
-						//$this->getAuthService()->setStorage($this->getSessionStorage());
+						$this->getAuthService()->setStorage($this->getSessionStorage());
 					}
-					//$this->getAuthService()->getStorage()->write($request->getPost('username'));
+					$this->getAuthService()->getStorage()->write($request->getPost('username'));
 					$this->session = new Container('HJ');
 					$this->session->authenticated = true;
 					$this->session->offsetSet('username', $request->getPost('username'));
@@ -82,8 +82,8 @@ class AuthController extends AbstractActionController
 	 
 	public function logoutAction()
 	{
-		//$this->getSessionStorage()->forgetMe();
-		//$this->getAuthService()->clearIdentity();
+		$this->getSessionStorage()->forgetMe();
+		$this->getAuthService()->clearIdentity();
 		 
 		$this->session->getManager()->getStorage()->clear('HJ');
 		return $this->redirect()->toRoute('administration/login');
