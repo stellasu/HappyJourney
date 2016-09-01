@@ -22,12 +22,13 @@ class IndexController extends AbstractActionController
 	public function indexAction()
     {
     	$view = new ViewModel();
+    	error_reporting(E_ERROR | E_WARNING | E_PARSE);
     	$authService = $this->getServiceLocator()->get('AuthService');
     	$session = new Container('HJ');
     	if ($authService->getIdentity() != null){
     		return $view;
     	}
-    	return $this->redirect()->toRoute('login');    	
+    	return $this->redirect()->toRoute("login");
     }
     
 }

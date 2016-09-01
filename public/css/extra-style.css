@@ -84,3 +84,20 @@ input {
 	color: blue;
 	font-style: italic;
 }
+
+.login-form-item {
+	margin: 0.5em auto 0.5em auto;
+}
+
+.login-body {
+	margin-top: 2em;
+	height: 20em;
+	left: 0;
+	width: 100%;
+}
+
+.horizontal-center {
+	width: 15em;
+	margin-left: auto;
+	margin-right: auto;
+}

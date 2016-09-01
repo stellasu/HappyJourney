@@ -56,22 +56,33 @@ return array(
         			'options' => array(
         					'route'    => '/administration/login',
         					'defaults' => array(
-        							'controller'    => 'Administration\Controller\Login',
+        							'controller'    => 'Administration\Controller\Auth',
         							'action'        => 'login',
         					),
         			),
         	),  
         		
-        		'auth' => array(
-        				'type' => 'segment',
-        				'options' => array(
-        						'route'    => '/administration/authenticate',
-        						'defaults' => array(
-        								'controller'    => 'Administration\Controller\Auth',
-        								'action'        => 'authenticate',
-        						),
-        				),
-        		),
+        	'logout' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/logout',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\Auth',
+        							'action'        => 'logout',
+        					),
+        			),
+        	),
+        		
+        	'auth' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/authenticate',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\Auth',
+        							'action'        => 'authenticate',
+        					),
+        			),
+        	),
         		
         ),
     ),

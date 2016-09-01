@@ -371,29 +371,50 @@ jQuery(document).ready(function($) {
 	 * admin login
 	 */
 	$("#loginSubmit").click(function(e){
-		var username = $("#username").val();
-		var password = $("#password").val();
-		console.log("un: "+username);
-		$.ajax({
-			url:"/administration/authenticate",
-			dataType:"json",
-			type:"post",
-			data:{username:username,
-				password:password},
-			success: function(response) {
-				if(response.success){
-					window.location.href = "http://happyjourney.local/administration";
-				}else{
-										
+		var username = $("#login-username").val();
+		var password = $("#login-password").val();
+		var rememberme = $("#login-rememberme").val();
+		var ready = true;
+		$("#loginDiv").find("div.error-message").css("display","none")
+		if(username==''){
+			ready = false;
+			$("#login-username").parent(".login-form-item").find(".error-message").css("display","inline");
+		}else{
+			$("#login-username").parent(".login-form-item").find(".error-message").css("display","none");
+		}
+		if(password==''){
+			ready = false;
+			$("#login-password").parent(".login-form-item").find(".error-message").css("display","inline");
+		}else{
+			$("#login-password").parent(".login-form-item").find(".error-message").css("display","none");
+		}
+		if(ready){
+			$.ajax({
+				url:"/administration/authenticate",
+				dataType:"json",
+				type:"post",
+				data:{username:username,
+					password:password,
+					rememberme:rememberme},
+				success: function(response) {
+					if(response.success){
+						window.location.href = "http://happyjourney.local/administration";
+					}else{
+						$("#loginDiv").find("div.error-message").css("display","inline")
+																.html(response.message);
+					}
+				},
+				beforeSend: function() {
+					
+				},
+				error: function(xhr, status, error) {
+					$("#loginDiv").find("div.error-message").css("display","inline")
+					.html("Error!");
+					console.log(xhr.responseText);
 				}
-			},
-			beforeSend: function() {
-				
-			},
-			error: function(xhr, status, error) {
-				console.log(xhr.responseText);
-			}
-		});
+			});
+		}
+		
 	});
 	
 });
