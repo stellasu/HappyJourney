@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
 			ctDropdown.append('<li style="padding-left:5em; cursor:default;" onclick="foldAreaList();">[收起]</li>');
 		},
 		beforeSend: function() {
-			console.log("fetching areas ...");
+			//console.log("fetching areas ...");
 		},
 		error: function(xhr, status, error) {
 			console.log(xhr.responseText);
@@ -33,12 +33,14 @@ jQuery(document).ready(function($) {
 	$("body").find(".customized-travel-dropdown-toggle").attr("href", customized_travel_url);
 	var shuttle_url = "http://"+window.location.host+"/shuttleservice";
 	$("#shuttle-tab-header a").attr("href", shuttle_url);
+	//admin home
+	$("body").find(".admin-home-url").attr("href", home_url+"/administration");
 	
 	/**
 	 * get current url and decide which tab should be highlighted
 	 */
 	$("#main-navbar li").removeClass("active");
-	var current_url = window.location.pathname;
+	var current_url = window.location.pathname;	
 	if(current_url == "/"){
 		$("#home-tab-header").addClass("active");
 	}else if(current_url == "/customizedtravel"){
@@ -49,6 +51,8 @@ jQuery(document).ready(function($) {
 		$("#info-tab-header").addClass("active");
 	}else if(current_url == "/parteners"){
 		$("#partener-tab-header").addClass("active");
+	}else if(current_url == "/administration"){
+		$("#admin-home-tab-header").addClass("active");
 	}
 	
 	/**
