@@ -42,7 +42,7 @@ class CustomizedTravelController extends AbstractActionController {
 		} catch (\Exception $e) {
 			error_log("error: ".$e->getMessage());
 		}		 
-		$view->result = $areaResult;
+		$view->setVariables(array('result'=>$areaResult));
 		return $view;
 	}
 	
