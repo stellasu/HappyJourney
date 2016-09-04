@@ -105,7 +105,6 @@ input {
 .admin-page-modal {
 	left: 0;
 	width: 100%;
-	padding: 1.25em;
 }
 
 .text-manage-section {
@@ -115,13 +114,18 @@ input {
 }
 
 .text-manage-section-header {
-	padding: 0.25em;
+	padding: 0.25em 0.25em 0 1.25em;
+	text-align: left;
 }
 
 .text-manage-section-content {
 	padding: 1em;
 }
 
+.text-manage-section-content .button-wrap {
+	padding: 0 0 1em 0;
+}
+
 .text-manage-submit {
-	margin: 0.25em 0.25em 0 0;
+	float: left;
 }
