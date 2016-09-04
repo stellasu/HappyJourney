@@ -84,6 +84,17 @@ return array(
         			),
         	),
         		
+        	'updatetext' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/updatetext',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\Index',
+        							'action'        => 'updatetext',
+        					),
+        			),
+        	),
+        		
         ),
     ),
     'service_manager' => array(

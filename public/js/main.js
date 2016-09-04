@@ -34,7 +34,7 @@ jQuery(document).ready(function($) {
 	var shuttle_url = "http://"+window.location.host+"/shuttleservice";
 	$("#shuttle-tab-header a").attr("href", shuttle_url);
 	//admin home
-	$("body").find(".admin-home-url").attr("href", home_url+"/administration");
+	$("body").find(".text-manage-url").attr("href", home_url+"/administration");
 	
 	/**
 	 * get current url and decide which tab should be highlighted
@@ -52,7 +52,7 @@ jQuery(document).ready(function($) {
 	}else if(current_url == "/parteners"){
 		$("#partener-tab-header").addClass("active");
 	}else if(current_url == "/administration"){
-		$("#admin-home-tab-header").addClass("active");
+		$("#text-manage-tab-header").addClass("active");
 	}
 	
 	/**
@@ -414,6 +414,44 @@ jQuery(document).ready(function($) {
 				error: function(xhr, status, error) {
 					$("#loginDiv").find("div.error-message").css("display","inline")
 					.html("Error!");
+					console.log(xhr.responseText);
+				}
+			});
+		}
+		
+	});
+	
+	$("button.text-manage-submit").click(function(e){
+		var type = $(this).data("type");
+		var div = $("#edit-"+type+"-text");
+		var text = div.find("textarea").val();
+		var ready = true;
+		div.find("span.error-message").css("display","none")
+		if(text==''){
+			ready = false;
+			div.find("span.error-message").css("display","inline");
+		}else{
+			div.find("span.error-message").css("display","none");
+		}
+		if(ready){
+			$.ajax({
+				url:"/administration/updatetext",
+				dataType:"json",
+				type:"post",
+				data:{type:type,
+					text:text},
+				success: function(response) {
+					if(response.success){
+						div.find("span.error-message").css("display","inline").html("已更新成功！");
+					}else{
+						div.find("span.error-message").css("display","inline").html(response.message);
+					}
+				},
+				beforeSend: function() {
+					
+				},
+				error: function(xhr, status, error) {
+					div.find("span.error-message").css("display","inline").html("Error!");
 					console.log(xhr.responseText);
 				}
 			});
