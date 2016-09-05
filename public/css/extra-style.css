@@ -84,3 +84,72 @@ input {
 	color: blue;
 	font-style: italic;
 }
+
+.login-form-item {
+	margin: 0.5em auto 0.5em auto;
+}
+
+.login-body {
+	margin-top: 2em;
+	height: 20em;
+	left: 0;
+	width: 100%;
+}
+
+.horizontal-center {
+	width: 15em;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.admin-page-modal {
+	left: 0;
+	width: 100%;
+}
+
+.text-manage-section {
+	margin: 1em;
+	padding: 0.25em;
+	width: 40em;
+}
+
+.text-manage-section-header {
+	padding: 0.25em 0.25em 0 1.25em;
+	text-align: left;
+}
+
+.text-manage-section-content {
+	padding: 1em;
+}
+
+.text-manage-section-content .button-wrap {
+	padding: 0 0 1em 0;
+}
+
+.text-manage-submit {
+	float: left;
+}
+
+.list-contact-table {
+	border: 1px solid black;
+}
+
+.list-contact-table th{
+	border: 1px solid black;
+	width: 10em;
+	text-align: center;
+	padding: 0.4em;
+}
+
+.list-contact-table td{
+	border: 1px solid black;
+	text-align: left;
+	padding: 0.4em;
+}
+
+.display-message-div {
+	text-align: left;
+	margin: 0.5em 0.5em 0.5em 0;
+}
+
+

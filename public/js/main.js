@@ -16,7 +16,7 @@ jQuery(document).ready(function($) {
 			ctDropdown.append('<li style="padding-left:5em; cursor:default;" onclick="foldAreaList();">[收起]</li>');
 		},
 		beforeSend: function() {
-			console.log("fetching areas ...");
+			//console.log("fetching areas ...");
 		},
 		error: function(xhr, status, error) {
 			console.log(xhr.responseText);
@@ -33,12 +33,16 @@ jQuery(document).ready(function($) {
 	$("body").find(".customized-travel-dropdown-toggle").attr("href", customized_travel_url);
 	var shuttle_url = "http://"+window.location.host+"/shuttleservice";
 	$("#shuttle-tab-header a").attr("href", shuttle_url);
+	//admin urls
+	$("body").find(".text-manage-url").attr("href", home_url+"/administration");
+	var customized_travel_manage_url = "http://"+window.location.host+"/administration/customizedtravel";
+	$("body").find(".customized-travel-manage-dropdown-toggle").attr("href", customized_travel_manage_url);
 	
 	/**
 	 * get current url and decide which tab should be highlighted
 	 */
 	$("#main-navbar li").removeClass("active");
-	var current_url = window.location.pathname;
+	var current_url = window.location.pathname;	
 	if(current_url == "/"){
 		$("#home-tab-header").addClass("active");
 	}else if(current_url == "/customizedtravel"){
@@ -49,6 +53,10 @@ jQuery(document).ready(function($) {
 		$("#info-tab-header").addClass("active");
 	}else if(current_url == "/parteners"){
 		$("#partener-tab-header").addClass("active");
+	}else if(current_url == "/administration"){
+		$("#text-manage-tab-header").addClass("active");
+	}else if(current_url == "/administration/customizedtravel"){
+		$("#ct-manage-tab-header").addClass("active");
 	}
 	
 	/**
@@ -371,20 +379,102 @@ jQuery(document).ready(function($) {
 	 * admin login
 	 */
 	$("#loginSubmit").click(function(e){
-		var username = $("#username").val();
-		var password = $("#password").val();
-		console.log("un: "+username);
+		var username = $("#login-username").val();
+		var password = $("#login-password").val();
+		var rememberme = $("#login-rememberme").val();
+		var ready = true;
+		$("#loginDiv").find("div.error-message").css("display","none")
+		if(username==''){
+			ready = false;
+			$("#login-username").parent(".login-form-item").find(".error-message").css("display","inline");
+		}else{
+			$("#login-username").parent(".login-form-item").find(".error-message").css("display","none");
+		}
+		if(password==''){
+			ready = false;
+			$("#login-password").parent(".login-form-item").find(".error-message").css("display","inline");
+		}else{
+			$("#login-password").parent(".login-form-item").find(".error-message").css("display","none");
+		}
+		if(ready){
+			$.ajax({
+				url:"/administration/authenticate",
+				dataType:"json",
+				type:"post",
+				data:{username:username,
+					password:password,
+					rememberme:rememberme},
+				success: function(response) {
+					if(response.success){
+						window.location.href = "http://happyjourney.local/administration";
+					}else{
+						$("#loginDiv").find("div.error-message").css("display","inline")
+																.html(response.message);
+					}
+				},
+				beforeSend: function() {
+					
+				},
+				error: function(xhr, status, error) {
+					$("#loginDiv").find("div.error-message").css("display","inline")
+					.html("Error!");
+					console.log(xhr.responseText);
+				}
+			});
+		}
+		
+	});
+	
+	$("button.text-manage-submit").click(function(e){
+		var type = $(this).data("type");
+		var div = $("#edit-"+type+"-text");
+		var text = div.find("textarea").val();
+		var ready = true;
+		div.find("span.error-message").css("display","none")
+		if(text==''){
+			ready = false;
+			div.find("span.error-message").css("display","inline");
+		}else{
+			div.find("span.error-message").css("display","none");
+		}
+		if(ready){
+			$.ajax({
+				url:"/administration/updatetext",
+				dataType:"json",
+				type:"post",
+				data:{type:type,
+					text:text},
+				success: function(response) {
+					if(response.success){
+						div.find("span.error-message").css("display","inline").html("已更新成功！");
+					}else{
+						div.find("span.error-message").css("display","inline").html(response.message);
+					}
+				},
+				beforeSend: function() {
+					
+				},
+				error: function(xhr, status, error) {
+					div.find("span.error-message").css("display","inline").html("Error!");
+					console.log(xhr.responseText);
+				}
+			});
+		}
+		
+	});
+	
+	$("button.delete-message-btn").click(function(e){
+		var messageId = $(this).data("id");
 		$.ajax({
-			url:"/administration/authenticate",
+			url:"/administration/customizedtravel/deletemessage",
 			dataType:"json",
 			type:"post",
-			data:{username:username,
-				password:password},
+			data:{Id:messageId},
 			success: function(response) {
 				if(response.success){
-					window.location.href = "http://happyjourney.local/administration";
+					$("#message-div-"+messageId).remove();
 				}else{
-										
+					console.log(response);
 				}
 			},
 			beforeSend: function() {

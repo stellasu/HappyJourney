@@ -56,22 +56,69 @@ return array(
         			'options' => array(
         					'route'    => '/administration/login',
         					'defaults' => array(
-        							'controller'    => 'Administration\Controller\Login',
+        							'controller'    => 'Administration\Controller\Auth',
         							'action'        => 'login',
         					),
         			),
         	),  
         		
-        		'auth' => array(
-        				'type' => 'segment',
-        				'options' => array(
-        						'route'    => '/administration/authenticate',
-        						'defaults' => array(
-        								'controller'    => 'Administration\Controller\Auth',
-        								'action'        => 'authenticate',
-        						),
-        				),
-        		),
+        	'logout' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/logout',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\Auth',
+        							'action'        => 'logout',
+        					),
+        			),
+        	),
+        		
+        	'auth' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/authenticate',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\Auth',
+        							'action'        => 'authenticate',
+        					),
+        			),
+        	),
+        		
+        	'updatetext' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/updatetext',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\Index',
+        							'action'        => 'updatetext',
+        					),
+        			),
+        	),
+        		
+        	'managecustomizedtravel' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/customizedtravel[/:page]',
+        					'constraints'   => array(
+        							'page'        => '[0-9]+',
+        					),
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\CustomizedTravel',
+        							'action'        => 'listcustomermessage',
+        					),
+        			),
+        	),
+        		
+        	'deletecustomizedtravelmessage' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/customizedtravel/deletemessage',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\CustomizedTravel',
+        							'action'        => 'deleteMessage',
+        					),
+        			),
+        	),
         		
         ),
     ),
@@ -97,6 +144,7 @@ return array(
             'Administration\Controller\Index' => 'Administration\Controller\IndexController',
         	'Administration\Controller\Login' => 'Administration\Controller\LoginController',
         	'Administration\Controller\Auth' => 'Administration\Controller\AuthController',
+        	'Administration\Controller\CustomizedTravel' => 'Administration\Controller\CustomizedTravelController',
         ),
     ),
     'view_manager' => array(
