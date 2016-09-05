@@ -1,0 +1,48 @@
+<div class="content">
+	<div class="contact">
+		<div class="container">
+			<div id="list-ct-message-div">
+				<?php if($this->result != null):?>
+					<?php foreach($this->result['messages'] as $item):?>
+						<div id="message-div-<?php echo $item->Id;?>">
+							<table class="list-contact-table">
+								<tr><th>First Name</th><th>Last Name</th><th>Time</th><th>Phone</th><th>Email</th><th>Wechat</tr>
+								<tr>
+									<td><?php echo $item->FirstName;?></td>
+									<td><?php echo $item->LastName;?></td>
+									<td><?php echo $item->CreationTime;?></td>
+									<td><?php echo $item->Phone;?></td>
+									<td><?php echo $item->Email;?></td>
+									<td><?php echo $item->Wechat;?></td>
+								</tr>
+							</table>
+							<div class="display-message-div">
+								<span>Message: </span>
+								<span class="display-message"><?php echo $item->Message;?></span>
+							</div>
+							<div class="delete-message-div"><button class="delete-message-btn" data-Id=<?php echo $item->Id;?>>Delete</button></div>
+							<br>
+						</div>
+					<?php endforeach;?>					
+					<div class="ct-message-pages-div">
+						<?php if($this->result['current'] != 1):?>
+						<span><a href="/administration/customizedtravel/1">first</a></span>
+						<?php endif;?>						
+						<?php if($this->result['previous'] != null):?>
+						<span><a href="/administration/customizedtravel/<?php echo $this->result['previous'];?>">previous</a></span>
+						<?php endif;?>						
+						<span><?php echo $this->result['current'];?></span>						
+						<?php if($this->result['next'] != null):?>
+						<span><a href="/administration/customizedtravel/<?php echo $this->result['next'];?>">next</a></span>
+						<?php endif;?>						
+						<?php if($this->result['last'] != $this->result['current']):?>
+						<span><a href="/administration/customizedtravel/<?php echo $this->result['last'];?>"><?php echo $this->result['last'];?></a></span>
+						<?php endif;?>						
+					</div>
+				<?php else:?>
+					No more messages.
+				<?php endif;?>
+		 	 </div>
+		</div>
+	</div>
+</div>

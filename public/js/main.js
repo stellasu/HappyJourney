@@ -33,8 +33,10 @@ jQuery(document).ready(function($) {
 	$("body").find(".customized-travel-dropdown-toggle").attr("href", customized_travel_url);
 	var shuttle_url = "http://"+window.location.host+"/shuttleservice";
 	$("#shuttle-tab-header a").attr("href", shuttle_url);
-	//admin home
+	//admin urls
 	$("body").find(".text-manage-url").attr("href", home_url+"/administration");
+	var customized_travel_manage_url = "http://"+window.location.host+"/administration/customizedtravel";
+	$("body").find(".customized-travel-manage-dropdown-toggle").attr("href", customized_travel_manage_url);
 	
 	/**
 	 * get current url and decide which tab should be highlighted
@@ -53,6 +55,8 @@ jQuery(document).ready(function($) {
 		$("#partener-tab-header").addClass("active");
 	}else if(current_url == "/administration"){
 		$("#text-manage-tab-header").addClass("active");
+	}else if(current_url == "/administration/customizedtravel"){
+		$("#ct-manage-tab-header").addClass("active");
 	}
 	
 	/**
@@ -457,6 +461,29 @@ jQuery(document).ready(function($) {
 			});
 		}
 		
+	});
+	
+	$("button.delete-message-btn").click(function(e){
+		var messageId = $(this).data("id");
+		$.ajax({
+			url:"/administration/customizedtravel/deletemessage",
+			dataType:"json",
+			type:"post",
+			data:{Id:messageId},
+			success: function(response) {
+				if(response.success){
+					$("#message-div-"+messageId).remove();
+				}else{
+					console.log(response);
+				}
+			},
+			beforeSend: function() {
+				
+			},
+			error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			}
+		});
 	});
 	
 });
