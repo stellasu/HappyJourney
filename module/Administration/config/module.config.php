@@ -120,6 +120,28 @@ return array(
         			),
         	),
         		
+        	'editarea' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/customizedtravel/editarea',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\CustomizedTravel',
+        							'action'        => 'editarea',
+        					),
+        			),
+        	),
+        		
+        	'addarea' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/customizedtravel/addarea',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\CustomizedTravel',
+        							'action'        => 'addarea',
+        					),
+        			),
+        	),
+        		
         ),
     ),
     'service_manager' => array(

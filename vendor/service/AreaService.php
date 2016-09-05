@@ -2,6 +2,7 @@
 namespace Service;
 
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Driver\ResultInterface;
 
@@ -61,6 +62,65 @@ class AreaService {
 			return $returnArray;
 		}else{
 			return null;
+		}
+	}
+	
+	/**
+	 * add an area
+	 * @param array $data{Name, Description}
+	 */
+	public function addArea(Array $data = null)
+	{
+		if(isset($data['Name']) && $data['Name']!=null
+				&& isset($data['Description']) && $data['Description']!=null){
+			try {
+				$sql = new Sql($this->db);
+				$insert = $sql->insert('Area');
+				$insert->values($data);
+				$statement = $sql->prepareStatementForSqlObject($insert);
+				$results = $statement->execute();
+				$lastInsertId = $this->db->getDriver()->getLastGeneratedValue();
+				if($lastInsertId > 0){
+					return array('success'=>true, 'result'=>$lastInsertId);
+				}else{
+					return array('success'=>false, 'message'=>'insertId incorrect');
+				}
+			} catch (\Exception $e) {
+				error_log("error: ".$e->getMessage());
+				return array('success'=>false, 'message'=>'insert failed');
+			}
+		}else{
+			return array('success'=>false, 'message'=>'invalid data');
+		}
+	}
+	
+	/**
+	 * edit an area
+	 * @param array $data{Id}
+	 */
+	public function editArea(Array $data = null)
+	{
+		if(isset($data['Id']) && $data['Id']!=null){
+			try {
+				$sql = new Sql($this->db);
+				$update = $sql->update("Area");
+				$values = array();
+				foreach($data as $k=>$v){
+					if($k != 'Id'){
+						$values[$k] = $v;
+					}
+				}
+				$update->set($values);
+				$update->where(array('Id' => $data['Id']));
+				$statement = $sql->prepareStatementForSqlObject($update);
+				$results = $statement->execute();
+				return array('success'=>true);
+			} catch (\Exception $e) {
+				error_log("error: ".$e->getMessage());
+				return array('success'=>false, 'message'=>'update failed');
+			}
+		}else{
+			return array('success'=>false, 'message'=>'invalid data');
 		}
 	}
 }

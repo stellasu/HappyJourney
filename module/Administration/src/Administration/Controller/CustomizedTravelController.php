@@ -59,5 +59,61 @@ class CustomizedTravelController extends AbstractActionController {
 		return $view;
 	}
 	
+	public function addAreaAction()
+	{
+		if($this->getRequest()->isPost()){
+			$postParams = $this->params()->fromPost();			
+			if($postParams != null){
+				$view = new JsonModel();
+				$view->setTerminal(true);
+				$areaService = new AreaService($this->serviceLocator);
+				$addResult = $areaService->addArea($postParams);
+				$view->setVariables($addResult);
+				return $view;
+			}else{
+				$view->setVariables(array('success'=>false, 'message'=>'no data'));
+				return $view;
+			}
+		}else{
+			$view = new ViewModel();
+			return $view;
+		}
+	}
+	
+	
+	public function editAreaAction()
+	{
+		if($this->getRequest()->isPost()){
+			$postParams = $this->params()->fromPost();
+			$view = new JsonModel();
+			$view->setTerminal(true);
+			if($postParams != null){
+				$areaService = new AreaService($this->serviceLocator);
+				$postParams['UpdateTime'] = gmdate("Y-m-d H:i:s");
+				$editResult = $areaService->editArea($postParams);
+				$view->setVariables($editResult);
+				return $view;
+			}else{
+				$view->setVariables(array('success'=>false, 'message'=>'no data'));
+				return $view;
+			}
+		}else{
+			//list areas
+			$view = new ViewModel();
+			$areaService = new AreaService($this->serviceLocator);
+			try {
+				$results = $areaService->getAreas();
+			} catch (\Exception $e) {
+				error_log("error: ".$e->getMessage());
+			}
+			if($results != null){
+				$view->setVariables(array('result'=>$results));
+			}else{
+				$view->setVariables(array('result'=>null));
+			}
+			return $view;
+		}
+	}
+	
 	
 }

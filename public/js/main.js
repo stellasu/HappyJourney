@@ -71,11 +71,15 @@ jQuery(document).ready(function($) {
       });
 	
 	/**
-	 * open customized-travel dropdown 
+	 * open customized-travel and admin customized-travel dropdown 
 	 */
 	$(".customized-travel-dropdown-toggle").hover(function(e){
 		e.preventDefault();
 		$(".customized-travel-dropdown").css("display", "block");
+	});
+	$(".customized-travel-manage-dropdown-toggle").hover(function(e){
+		e.preventDefault();
+		$(".customized-travel-manage-dropdown").css("display", "block");
 	});
 	
 	/**
@@ -486,6 +490,83 @@ jQuery(document).ready(function($) {
 		});
 	});
 	
+	$(".edit-area-submit-div button").click(function(e){
+		var type = $(this).data("type");
+		var Id = $(this).parent(".edit-area-submit-div").data("id");
+		var div = $("#area-div-"+Id);
+		if(type=="delete"){
+			var post = {Id:Id, Deleted:1};
+		}
+		if(type=="edit"){			
+			var description = div.find("textarea").val();
+			var post = {Id:Id, Description:description};
+		}
+		$("span.error-message").css("display","none")
+		$.ajax({
+			url:"/administration/customizedtravel/editarea",
+			dataType:"json",
+			type:"post",
+			data:post,
+			success: function(response) {
+				if(response.success){
+					if(type=="edit"){
+						div.find("span.error-message").css("display","inline").html("已更新成功！");
+					}
+					if(type=="delete"){
+						div.remove();
+					}
+				}else{
+					div.find("span.error-message").css("display","inline").html(response.message);
+				}
+			},
+			beforeSend: function() {
+				
+			},
+			error: function(xhr, status, error) {
+				div.find("span.error-message").css("display","inline").html("Error!");
+				console.log(xhr.responseText);
+			}
+		});
+		
+	});
+	
+	$(".add-area-submit-div button").click(function(e){
+		var name = $(".area-detail-div").find("input").val();
+		var description = $(".area-detail-div").find("textarea").val();
+		var ready = true;
+		$("span.error-message").css("display","none").html("");
+		if(name=='' || description==''){
+			ready = false;
+			$("span.error-message").css("display","inline").html("请填写名称和介绍");
+		}else{
+			$("span.error-message").css("display","none").html("");
+		}
+		if(ready){
+			$.ajax({
+				url:"/administration/customizedtravel/addarea",
+				dataType:"json",
+				type:"post",
+				data:{Name:name,
+					Description:description},
+				success: function(response) {
+					if(response.success){
+						$("span.error-message").css("display","inline").html("已更新成功！");
+					}else{
+						$("span.error-message").css("display","inline").html(response.message);
+					}
+				},
+				beforeSend: function() {
+					
+				},
+				error: function(xhr, status, error) {
+					$("span.error-message").css("display","inline").html("Error!");
+					console.log(xhr.responseText);
+				}
+			});
+		}
+		
+	});
+	
 });
 
 /**
@@ -494,4 +575,5 @@ jQuery(document).ready(function($) {
 function foldAreaList()
 {
 	$(".customized-travel-dropdown").css("display", "none");
+	$(".customized-travel-manage-dropdown").css("display", "none");
 }
