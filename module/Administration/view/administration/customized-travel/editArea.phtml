@@ -1,0 +1,29 @@
+<div class="content">
+	<div class="contact">
+		<div class="container">
+			<div id="list-area-div">
+				<?php if($this->result != null):?>
+					<?php foreach($this->result as $item):?>
+						<div id="area-div-<?php echo $item['Id'];?>" class="display-area-div">
+							<div class="area-detail-div">
+								<div>Area: <?php echo $item['Name'];?></div>
+								<div class="area-edit-div">
+									<div>Description: </div>
+									<textarea rows="10" col="40"><?php echo $item['Description'];?></textarea>
+								</div>
+							</div>
+							<div class="edit-area-submit-div" data-Id=<?php echo $item['Id'];?>>
+								<button data-type="edit">Edit</button>
+								<button data-type="delete">Delete</button>
+							</div>
+							<span class="error-message"></span>
+							<br>
+						</div>
+					<?php endforeach;?>					
+				<?php else:?>
+					No Areas.
+				<?php endif;?>
+		 	 </div>
+		</div>
+	</div>
+</div>

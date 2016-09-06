@@ -152,4 +152,23 @@ input {
 	margin: 0.5em 0.5em 0.5em 0;
 }
 
+.delete-message-div {
+	text-align: left;
+}
 
+.display-area-div, .add-area-div {
+	text-align: left;
+}
+
+.area-edit-div textarea, .area-area-textarea-div textarea {
+	width: 30em;
+    height: 12em;
+}
+
+.edit-area-submit-div button，.add-area-submit-div button {
+	margin: 0.5em 0.5em 0.5em 0;
+}
+
+.area-detail-div div {
+	padding-bottom: 0.5em; 
+}

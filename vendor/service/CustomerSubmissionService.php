@@ -5,6 +5,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\Db\Sql\Sql;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\Adapter\Driver\ResultInterface;
+use Service\AreaService;
 
 class CustomerSubmissionService {
 	
@@ -157,7 +158,6 @@ class CustomerSubmissionService {
 						$values[$k] = $v;
 					}
 				}
-				error_log("values: ".json_encode($values));
 				$update->set($values);
 				$update->where(array('Id' => $data['Id']));
 				$statement = $sql->prepareStatementForSqlObject($update);
