@@ -37,6 +37,8 @@ jQuery(document).ready(function($) {
 	$("body").find(".text-manage-url").attr("href", home_url+"/administration");
 	var customized_travel_manage_url = "http://"+window.location.host+"/administration/customizedtravel";
 	$("body").find(".customized-travel-manage-dropdown-toggle").attr("href", customized_travel_manage_url);
+	var shuttle_manage_url = "http://"+window.location.host+"/administration/shuttleservice";
+	$("body").find(".shuttle-service-manage-dropdown-toggle").attr("href", shuttle_manage_url);
 	
 	/**
 	 * get current url and decide which tab should be highlighted
@@ -55,8 +57,10 @@ jQuery(document).ready(function($) {
 		$("#partener-tab-header").addClass("active");
 	}else if(current_url == "/administration"){
 		$("#text-manage-tab-header").addClass("active");
-	}else if(current_url == "/administration/customizedtravel"){
+	}else if(current_url=="/administration/customizedtravel" || current_url=="/administration/customizedtravel/addarea" || current_url=="/administration/customizedtravel/editarea"){
 		$("#ct-manage-tab-header").addClass("active");
+	}else if(current_url=="/administration/shuttleservice" || current_url=="/administration/shuttleservice/manageitinerary" || current_url=="/administration/shuttleservice/adddestination"){
+		$("#shuttle-manage-tab-header").addClass("active");
 	}
 	
 	/**
@@ -71,7 +75,7 @@ jQuery(document).ready(function($) {
       });
 	
 	/**
-	 * open customized-travel and admin customized-travel dropdown 
+	 * open customized-travel and admin customized-travel, admin shuttle-service dropdown 
 	 */
 	$(".customized-travel-dropdown-toggle").hover(function(e){
 		e.preventDefault();
@@ -80,6 +84,12 @@ jQuery(document).ready(function($) {
 	$(".customized-travel-manage-dropdown-toggle").hover(function(e){
 		e.preventDefault();
 		$(".customized-travel-manage-dropdown").css("display", "block");
+		$(".shuttle-service-manage-dropdown").css("display", "none");
+	});
+	$(".shuttle-service-manage-dropdown-toggle").hover(function(e){
+		e.preventDefault();
+		$(".customized-travel-manage-dropdown").css("display", "none");
+		$(".shuttle-service-manage-dropdown").css("display", "block");
 	});
 	
 	/**
@@ -429,6 +439,9 @@ jQuery(document).ready(function($) {
 		
 	});
 	
+	/**
+	 * admin: submit description edit
+	 */
 	$("button.text-manage-submit").click(function(e){
 		var type = $(this).data("type");
 		var div = $("#edit-"+type+"-text");
@@ -467,6 +480,9 @@ jQuery(document).ready(function($) {
 		
 	});
 	
+	/**
+	 * admin: delete a ct message
+	 */
 	$("button.delete-message-btn").click(function(e){
 		var messageId = $(this).data("id");
 		$.ajax({
@@ -490,6 +506,9 @@ jQuery(document).ready(function($) {
 		});
 	});
 	
+	/**
+	 * admin: submit area edit
+	 */
 	$(".edit-area-submit-div button").click(function(e){
 		var type = $(this).data("type");
 		var Id = $(this).parent(".edit-area-submit-div").data("id");
@@ -530,6 +549,9 @@ jQuery(document).ready(function($) {
 		
 	});
 	
+	/**
+	 * admin: add a new area
+	 */
 	$(".add-area-submit-div button").click(function(e){
 		var name = $(".area-detail-div").find("input").val();
 		var description = $(".area-detail-div").find("textarea").val();
@@ -567,6 +589,34 @@ jQuery(document).ready(function($) {
 		
 	});
 	
+	/**
+	 * admin: delete a ss message and close the linked CustomerItinerary
+	 */
+	$("button.delete-itinerary-btn").click(function(e){
+		var messageId = $(this).data("id");
+		var customerItineraryId = $(this).data("customeritineraryid");
+		$.ajax({
+			url:"/administration/shuttleservice/closecustomeritinerary",
+			dataType:"json",
+			type:"post",
+			data:{Id:messageId,
+				CustomerItineraryId: customerItineraryId},
+			success: function(response) {
+				if(response.success){
+					$("#itinerary-div-"+messageId).find(".itinerary-status-div").html('<div class="display-message-div"><span class="information-message">This request is processed.</span></div>');
+				}else{
+					console.log(response);
+				}
+			},
+			beforeSend: function() {
+				
+			},
+			error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			}
+		});
+	});
+	
 });
 
 /**
@@ -576,4 +626,5 @@ function foldAreaList()
 {
 	$(".customized-travel-dropdown").css("display", "none");
 	$(".customized-travel-manage-dropdown").css("display", "none");
+	$(".shuttle-service-manage-dropdown").css("display", "none");
 }

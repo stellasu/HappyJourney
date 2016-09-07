@@ -20,6 +20,13 @@ table.bottom-space {
 	margin: 0.5em;
 }
 
+.information-message {
+	font-style:italic;
+	font-size:1em;
+	color:red;
+	margin: 0.5em 0.5em 0.5em 0;
+}
+
 .rounded-border {
 	border: 2px solid;
 	border-radius: 0.5em;
@@ -130,18 +137,19 @@ input {
 	float: left;
 }
 
-.list-contact-table {
+.list-contact-table, .list-itinerary-table {
 	border: 1px solid black;
+	margin: 0.5em 0.5em 0.5em 0;
 }
 
-.list-contact-table th{
+.list-contact-table th, .list-itinerary-table th{
 	border: 1px solid black;
 	width: 10em;
 	text-align: center;
 	padding: 0.4em;
 }
 
-.list-contact-table td{
+.list-contact-table td, .list-itinerary-table td{
 	border: 1px solid black;
 	text-align: left;
 	padding: 0.4em;

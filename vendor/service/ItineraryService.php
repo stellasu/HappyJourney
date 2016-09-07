@@ -70,4 +70,34 @@ class ItineraryService {
 			return null;
 		}
 	}
+	
+	/**
+	 * edit CustomerItinerary
+	 * @param array $data{Id}
+	 */
+	public function editCustomerItinerary(Array $data = null)
+	{
+		if(isset($data['Id']) && $data['Id']!=null){
+			try {
+				$sql = new Sql($this->db);
+				$update = $sql->update("CustomerItinerary");
+				$values = array();
+				foreach($data as $k=>$v){
+					if($k != 'Id'){
+						$values[$k] = $v;
+					}
+				}
+				$update->set($values);
+				$update->where(array('Id' => $data['Id']));
+				$statement = $sql->prepareStatementForSqlObject($update);
+				$results = $statement->execute();
+				return true;
+			} catch (\Exception $e) {
+				return false;
+			}
+		}else{
+			return false;
+		}
+	}
+
 }

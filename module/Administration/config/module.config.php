@@ -142,6 +142,53 @@ return array(
         			),
         	),
         		
+        	'manageshuttleservice' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/shuttleservice[/:page]',
+        					'constraints'   => array(
+        							'page'        => '[0-9]+',
+        					),
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\ShuttleService',
+        							'action'        => 'index',
+        					),
+        			),
+        	),
+        		
+        	'manageitinerary' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/shuttleservice/manageitinerary',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\ShuttleService',
+        							'action'        => 'manageitinerary',
+        					),
+        			),
+        	),
+        		
+        	'adddestination' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/shuttleservice/adddestination',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\ShuttleService',
+        							'action'        => 'adddestination',
+        					),
+        			),
+        	),
+        		
+        	'closecustomeritinerary' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/shuttleservice/closecustomeritinerary',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\ShuttleService',
+        							'action'        => 'closeCustomerItinerary',
+        					),
+        			),
+        	),
+        		
         ),
     ),
     'service_manager' => array(
@@ -167,6 +214,7 @@ return array(
         	'Administration\Controller\Login' => 'Administration\Controller\LoginController',
         	'Administration\Controller\Auth' => 'Administration\Controller\AuthController',
         	'Administration\Controller\CustomizedTravel' => 'Administration\Controller\CustomizedTravelController',
+        	'Administration\Controller\ShuttleService' => 'Administration\Controller\ShuttleServiceController',
         ),
     ),
     'view_manager' => array(
