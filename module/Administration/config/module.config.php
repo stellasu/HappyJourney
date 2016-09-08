@@ -159,7 +159,10 @@ return array(
         	'manageitinerary' => array(
         			'type' => 'segment',
         			'options' => array(
-        					'route'    => '/administration/shuttleservice/manageitinerary',
+        					'route'    => '/administration/shuttleservice/manageitinerary[/:page]',
+        					'constraints'   => array(
+        							'page'        => '[0-9]+',
+        					),
         					'defaults' => array(
         							'controller'    => 'Administration\Controller\ShuttleService',
         							'action'        => 'manageitinerary',
@@ -167,13 +170,13 @@ return array(
         			),
         	),
         		
-        	'adddestination' => array(
+        	'additinerary' => array(
         			'type' => 'segment',
         			'options' => array(
-        					'route'    => '/administration/shuttleservice/adddestination',
+        					'route'    => '/administration/shuttleservice/additinerary',
         					'defaults' => array(
         							'controller'    => 'Administration\Controller\ShuttleService',
-        							'action'        => 'adddestination',
+        							'action'        => 'additinerary',
         					),
         			),
         	),
@@ -185,6 +188,17 @@ return array(
         					'defaults' => array(
         							'controller'    => 'Administration\Controller\ShuttleService',
         							'action'        => 'closeCustomerItinerary',
+        					),
+        			),
+        	),
+        		
+        	'edititinerary' => array(
+        			'type' => 'segment',
+        			'options' => array(
+        					'route'    => '/administration/shuttleservice/edititinerary',
+        					'defaults' => array(
+        							'controller'    => 'Administration\Controller\ShuttleService',
+        							'action'        => 'editItinerary',
         					),
         			),
         	),

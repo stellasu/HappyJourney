@@ -72,10 +72,24 @@ class ShuttleServiceController extends AbstractActionController {
     
     public function manageItineraryAction()
     {
-    	
+    	$view = new ViewModel();
+    	$itineraryService = new ItineraryService($this->serviceLocator);
+    	$postParams = $this->params()->fromRoute();
+    	if(isset($postParams['page']) && $postParams['page']!=null){
+    		$page = $postParams['page'];
+    	}else{
+    		$page = 1;
+    	}
+    	try {
+    		$results = $itineraryService->getItineraries(array('page'=>$page));
+    	} catch (\Exception $e) {
+    		error_log("error: ".$e->getMessage());
+    	}
+    	$view->setVariables(array('result'=>$results));
+    	return $view;
     }
     
-    public function addDestinationAction()
+    public function addItineraryAction()
     {
     	
     }
@@ -166,6 +180,34 @@ class ShuttleServiceController extends AbstractActionController {
     		}   		
     	}else{
     		$response = array('success'=>false, 'result'=>null);
+    	}
+    	$view->setVariables($response);
+    	return $view;
+    }
+    
+    public function editItineraryAction()
+    {
+    	$view = new JsonModel();
+    	$view->setTerminal(true);
+    	if($this->getRequest()->isPost()){
+    		$postParams = $this->params()->fromPost();
+    		if(isset($postParams['Id']) && $postParams['Id']!=null){
+    			$itineraryService = new ItineraryService($this->serviceLocator);
+    			$data = array('Id'=>$postParams['Id'],
+    					'Deleted'=>true,
+    					'UpdatedTime'=>gmdate("Y-m-d H:i:s"),
+    			);
+    			$editResult = $itineraryService->editItinerary($data);    
+    			if($editResult){
+    				$response = array('success'=>true);
+    			}else{
+    				$response = array('success'=>false);
+    			}
+    		}else{
+    			$response = array('success'=>false);
+    		}
+    	}else{
+    		$response = array('success'=>false);
     	}
     	$view->setVariables($response);
     	return $view;

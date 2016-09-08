@@ -59,7 +59,7 @@ jQuery(document).ready(function($) {
 		$("#text-manage-tab-header").addClass("active");
 	}else if(current_url=="/administration/customizedtravel" || current_url=="/administration/customizedtravel/addarea" || current_url=="/administration/customizedtravel/editarea"){
 		$("#ct-manage-tab-header").addClass("active");
-	}else if(current_url=="/administration/shuttleservice" || current_url=="/administration/shuttleservice/manageitinerary" || current_url=="/administration/shuttleservice/adddestination"){
+	}else if(current_url=="/administration/shuttleservice" || current_url=="/administration/shuttleservice/manageitinerary" || current_url=="/administration/shuttleservice/additinerary"){
 		$("#shuttle-manage-tab-header").addClass("active");
 	}
 	
@@ -592,7 +592,7 @@ jQuery(document).ready(function($) {
 	/**
 	 * admin: delete a ss message and close the linked CustomerItinerary
 	 */
-	$("button.delete-itinerary-btn").click(function(e){
+	$(".itinerary-status-div button.delete-itinerary-btn").click(function(e){
 		var messageId = $(this).data("id");
 		var customerItineraryId = $(this).data("customeritineraryid");
 		$.ajax({
@@ -604,6 +604,32 @@ jQuery(document).ready(function($) {
 			success: function(response) {
 				if(response.success){
 					$("#itinerary-div-"+messageId).find(".itinerary-status-div").html('<div class="display-message-div"><span class="information-message">This request is processed.</span></div>');
+				}else{
+					console.log(response);
+				}
+			},
+			beforeSend: function() {
+				
+			},
+			error: function(xhr, status, error) {
+				console.log(xhr.responseText);
+			}
+		});
+	});
+	
+	/**
+	 * admin: delete an itinerary
+	 */
+	$("#list-ss-itinerary-div button.delete-itinerary-btn").click(function(e){
+		var Id = $(this).data("id");
+		$.ajax({
+			url:"/administration/shuttleservice/edititinerary",
+			dataType:"json",
+			type:"post",
+			data:{Id:Id},
+			success: function(response) {
+				if(response.success){
+					$("#itinerary-div-"+Id).remove();
 				}else{
 					console.log(response);
 				}
