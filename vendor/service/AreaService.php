@@ -116,7 +116,6 @@ class AreaService {
 				$results = $statement->execute();
 				return array('success'=>true);
 			} catch (\Exception $e) {
-				error_log("error: ".$e->getMessage());
 				return array('success'=>false, 'message'=>'update failed');
 			}
 		}else{

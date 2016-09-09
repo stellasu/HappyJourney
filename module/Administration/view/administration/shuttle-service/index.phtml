@@ -1,0 +1,66 @@
+<div class="content">
+	<div class="contact">
+		<div class="container">
+			<div id="list-ss-message-div">
+				<?php if($this->result != null):?>
+					<?php foreach($this->result['itineraries'] as $item):?>
+						<div id="itinerary-div-<?php echo $item->Id;?>">
+							<table class="list-contact-table">
+								<tr><th>First Name</th><th>Last Name</th><th>Time</th><th>Phone</th><th>Email</th><th>Wechat</tr>
+								<tr>
+									<td><?php echo $item->FirstName;?></td>
+									<td><?php echo $item->LastName;?></td>
+									<td><?php echo $item->CreationTime;?></td>
+									<td><?php echo $item->Phone;?></td>
+									<td><?php echo $item->Email;?></td>
+									<td><?php echo $item->Wechat;?></td>
+								</tr>
+							</table>
+							<div class="display-message-div">
+								<span>Message: </span>
+								<span class="display-message"><?php echo $item->Message;?></span>
+							</div>
+							<?php if($item->CustomerItineraryId != null):?>
+								<div class="display-message-div"><span>Selected Itinerary:</span></div>
+								<table class="list-itinerary-table">
+									<tr><th>Destination</th><th>Time</th><th>Vehicle</th></tr>
+									<tr>
+										<td><?php echo $item->Destination;?></td>
+										<td><?php echo $item->Date." ".$item->Hour.": ".$item->Minute;?></td>
+										<td><?php echo $item->Vehicle;?></td>
+									</tr>
+								</table>
+							<?php endif;?>
+							<div class="itinerary-status-div">
+								<?php if($item->Deleted):?>
+									<div class="display-message-div"><span class="information-message">This request is processed.</span></div>
+								<?php else:?>
+									<div class="delete-message-div"><button class="delete-itinerary-btn" data-Id=<?php echo $item->Id;?> data-customeritineraryid=<?php echo $item->CustomerItineraryId;?>>Mark this request as processed</button></div>
+								<?php endif;?>
+							</div>
+							<br>
+							<br>
+						</div>
+					<?php endforeach;?>					
+					<div class="ss-itinerary-pages-div">
+						<?php if($this->result['current'] != 1):?>
+						<span><a href="/administration/shuttleservice/1">first</a></span>
+						<?php endif;?>						
+						<?php if($this->result['previous'] != null):?>
+						<span><a href="/administration/shuttleservice/<?php echo $this->result['previous'];?>">previous</a></span>
+						<?php endif;?>						
+						<span><?php echo $this->result['current'];?></span>						
+						<?php if($this->result['next'] != null):?>
+						<span><a href="/administration/shuttleservice/<?php echo $this->result['next'];?>">next</a></span>
+						<?php endif;?>						
+						<?php if($this->result['last'] != $this->result['current']):?>
+						<span><a href="/administration/shuttleservice/<?php echo $this->result['last'];?>"><?php echo $this->result['last'];?></a></span>
+						<?php endif;?>						
+					</div>
+				<?php else:?>
+					No more messages.
+				<?php endif;?>
+		 	 </div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,41 @@
+<div class="content">
+	<div class="contact">
+		<div class="container">
+			<div id="list-ss-itinerary-div">
+				<?php if($this->result != null):?>
+					<?php foreach($this->result['itineraries'] as $item):?>
+						<div id="itinerary-div-<?php echo $item->Id;?>">
+							<table class="list-itinerary-table">
+								<tr><th>Destination</th><th>Time</th><th>Vehicle</th></tr>
+								<tr>
+									<td><?php echo $item->Name;?></td>
+									<td><?php echo $item->Date." ".$item->Hour.": ".$item->Minute;?></td>
+									<td><?php echo $item->Vehicle;?></td>
+								</tr>
+							</table>
+							<div class="delete-message-div"><button class="delete-itinerary-btn" data-Id=<?php echo $item->Id;?>>Delete</button></div>
+							<br>
+						</div>
+					<?php endforeach;?>					
+					<div class="ss-itinerary-pages-div">
+						<?php if($this->result['current'] != 1):?>
+						<span><a href="/administration/shuttleservice/manageitinerary/1">first</a></span>
+						<?php endif;?>						
+						<?php if($this->result['previous'] != null):?>
+						<span><a href="/administration/shuttleservice/manageitinerary/<?php echo $this->result['previous'];?>">previous</a></span>
+						<?php endif;?>						
+						<span><?php echo $this->result['current'];?></span>						
+						<?php if($this->result['next'] != null):?>
+						<span><a href="/administration/shuttleservice/manageitinerary/<?php echo $this->result['next'];?>">next</a></span>
+						<?php endif;?>						
+						<?php if($this->result['last'] != $this->result['current']):?>
+						<span><a href="/administration/shuttleservice/manageitinerary/<?php echo $this->result['last'];?>"><?php echo $this->result['last'];?></a></span>
+						<?php endif;?>						
+					</div>
+				<?php else:?>
+					No more itineraries.
+				<?php endif;?>
+		 	 </div>
+		</div>
+	</div>
+</div>

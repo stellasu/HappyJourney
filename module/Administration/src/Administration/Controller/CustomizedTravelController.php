@@ -37,7 +37,6 @@ class CustomizedTravelController extends AbstractActionController {
 		if($this->getRequest()->isPost()){
 			$postParams = $this->params()->fromPost();
 			if(isset($postParams['Id'])){
-				error_log("id: ".$postParams['Id']);
 				$csService = new CustomerSubmissionService($this->serviceLocator);
 				$data = array('Id'=>$postParams['Id'],
 						'Deleted'=>true,
