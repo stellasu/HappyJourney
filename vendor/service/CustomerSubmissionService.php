@@ -180,7 +180,7 @@ class CustomerSubmissionService {
 	{
 		if(isset($data['page']) && $data['page']>0){
 			try {
-				$query = "Select Count(*) as c From CustomerSubmission Where Deleted = 0 And Type = ".self::SS_CUSTOMER_SUBMISSION;
+				$query = "Select Count(*) as c From CustomerSubmission Where Type = ".self::SS_CUSTOMER_SUBMISSION;
 				$sqlResult = $this->db->createStatement($query)->execute();
 				$total = 0;
 				if($sqlResult != null){

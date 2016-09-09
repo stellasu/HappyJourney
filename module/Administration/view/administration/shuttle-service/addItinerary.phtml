@@ -1,1 +1,69 @@
-addDestination
+<div class="content">
+	<div class="contact">
+		<div class="container">
+			<div class="contact-grids">
+				<div class="col-md-6 contact-right">
+					<div id="admin-ss-destination-div" class="rounded-border admin-ss-selection-div">
+					 	<div class="admin-ss-selection-header">选择目的地</div>
+						 <div class="admin-ss-selection-content">
+						 	<?php if($this->results->destinations != null):?>
+					 		<ul class="selection-ul">
+					 		<?php foreach($this->results->destinations as $destination):?>
+					 		<li class="unselected-li" data-destinationid="<?php echo $destination['Id'];?>"><?php echo $destination['Name'];?></li>
+					 		<?php endforeach;?>
+					 		</ul>
+					 		<?php endif;?>
+					 		或添加新的目的地：<br>
+					 		<input type="text" id="new-destination-name" placeholder="目的地名称" style="margin: 0.5em 0 0.5em 0;"/><br>
+					 		<textarea id="new-destination-description" placeholder="添加描述"></textarea>
+					 	</div>
+					</div>
+					<div id="admin-ss-destination-error" class="error-message">* 请选择或添加目的地</div>
+					<br>
+					<div id="admin-ss-date-div" class="rounded-border admin-ss-selection-div">
+					 	<div class="admin-ss-selection-header">选择日期</div>
+					 	<div class="admin-ss-selection-content">
+					 	<p>Date: <input type="text" class="datepicker"></p>
+					 	</div>
+					</div>
+					<div id="admin-ss-date-error" class="error-message">* 请选择日期</div>
+					<br>
+					<div id="admin-ss-time-div" class="rounded-border admin-ss-selection-div">
+					 	<div class="admin-ss-selection-header">选择时间</div>
+					 	<div class="admin-ss-selection-content">
+						 	<select id="admin-ss-hour-select">
+						 	  <option value="" disabled selected>----</option>
+							  <?php for($i=0; $i<24; $i++):?>
+							  <option value="<?php echo $i;?>"><?php echo $i;?></option>
+							  <?php endfor;?>
+							</select>
+							点&nbsp
+							<select id="admin-ss-minute-select">
+						 	  <option value="" disabled selected>----</option>
+							  <?php for($i=0; $i<60; $i++):?>
+							  <option value="<?php echo $i;?>"><?php echo $i;?></option>
+							  <?php endfor;?>
+							</select>
+							分
+							<br>
+					 	</div>
+					</div>
+					<div id="admin-ss-time-error" class="error-message">* 请选择时间</div>
+					<br>
+					<div id="admin-ss-vehicle-div" class="rounded-border admin-ss-selection-div">
+						<div class="admin-ss-selection-header">车辆</div>
+						<div class="admin-ss-selection-content">
+							<input type="text" id="admin-ss-vehicle" />
+						</div>
+					</div>
+					<div id="admin-ss-vehicle-error" class="error-message">* 请填写车辆</div>
+					<br>
+					<button id="admin-ss-submit" class="admin-ss-selection-btn">确认提交</button>
+					<br>
+					<div class="additinerary-error-message"><span class="error-message"></span></div>
+				</div>				
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>		
+</div>

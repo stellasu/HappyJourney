@@ -91,7 +91,80 @@ class ShuttleServiceController extends AbstractActionController {
     
     public function addItineraryAction()
     {
-    	
+    	if($this->getRequest()->isPost()){
+    		$view = new JsonModel();
+    		$view->setTerminal(true);
+    		$postParams = $this->params()->fromPost();
+    		if((isset($postParams['DestinationId'])&&$postParams['DestinationId']!=null ||
+    				isset($postParams['Name'])&&$postParams['Name']!=null) &&
+    				isset($postParams['Date'])&&$postParams['Date']!=null &&
+    				isset($postParams['Hour'])&&$postParams['Hour']!=null &&
+    				isset($postParams['Minute'])&&$postParams['Minute']!=null){
+    			if(isset($postParams['Name']) && $postParams['Name']!=null){
+    				$data['Name'] = $postParams['Name'];
+    				if(isset($postParams['Description']) && $postParams['Description']==null){
+    					$data['Description'] = $postParams['Description'];
+    				}else{
+    					$data['Description'] = "No description";
+    				}
+    				$destinationService = new DestinationService($this->serviceLocator);
+    				$addDestinationResult = $destinationService->addDestination($data);
+    				if(intval($addDestinationResult)>=0){
+    					unset($postParams['Name']);
+    					unset($postParams['Description']);
+    					$postParams['DestinationId'] = $addDestinationResult;
+    					$postParams['TimeZone'] = 'America/Los_Angeles';
+    					$itineraryService = new ItineraryService($this->serviceLocator);
+    					$addResult = $itineraryService->addItinerary($postParams);
+    					if(intval($addResult)>=0){
+    						$response = array('success'=>true);
+    					}else{
+    						$response = array('success'=>false, 'message'=>'Adding itinerary failed');
+    					}
+    				}else{
+    					$response = array('success'=>false, 'message'=>'Adding destination failed');
+    				}
+    			}else{
+    				unset($postParams['Name']);
+    				unset($postParams['Description']);
+    				$postParams['TimeZone'] = 'America/Los_Angeles';
+    				$itineraryService = new ItineraryService($this->serviceLocator);
+    				$addResult = $itineraryService->addItinerary($postParams);
+    				if(intval($addResult)>=0){
+    					$response = array('success'=>true);
+    				}else{
+    					$response = array('success'=>false, 'message'=>'Adding itinerary failed');
+    				}
+    			}
+    		}else{
+    			$response = array('success'=>false, 'message'=>'invalid data');
+    		}
+    		$view->setVariables($response);
+    		return $view;
+    	}else{
+    		$view = new ViewModel();
+    		$destinationService = new DestinationService($this->serviceLocator);
+			try{
+				$destinationResults = $destinationService->getDestinations();
+			} catch (\Exception $e) {
+				error_log("error: ".$e->getMessage());
+			}
+			
+			$results = new \stdClass();
+			if($textResults != null){
+				$text = $textResults[0]->Text;
+				$results->text = $text;
+			}else{
+				$results->text = null;
+			}
+			if($destinationResults != null){
+				$results->destinations = $destinationResults; 
+			}else{
+				$results->destinations = null;
+			}
+			$view->setVariables(array('results'=>$results));
+			return $view;
+    	}    	
     }
     
     public function listItineraryAction()

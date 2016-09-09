@@ -200,7 +200,7 @@ jQuery(document).ready(function($) {
 	/**
 	 * pick a data in #ss-date-div
 	 */
-	$("#ss-date-div .datepicker").datepicker();
+	$("#ss-date-div .datepicker").datepicker({minDate:0});
 	$("#ss-date-div .datepicker").mousedown(function() {
 	    $('#ui-datepicker-div').toggle();
 	});
@@ -641,6 +641,110 @@ jQuery(document).ready(function($) {
 				console.log(xhr.responseText);
 			}
 		});
+	});
+	
+	/**
+	 * select a value in #admin-ss-destination-div
+	 */
+	$("#admin-ss-destination-div li").click(function(e){
+		$(this).parent().find("li").removeClass("selected-li")
+								 .addClass("unselected-li");
+		$(this).addClass("selected-li")
+		   .removeClass("unselected-li");
+	});
+	
+	/**
+	 * when tries to add a new destination, unselect other destinations
+	 */
+	$("#new-destination-name").click(function(e){
+		$("#admin-ss-destination-div li").removeClass("selected-li")
+								 .addClass("unselected-li");
+	});
+	
+	/**
+	 * pick a date in #admin-ss-date-div
+	 */
+	$("#admin-ss-date-div .datepicker").datepicker({minDate:0});
+	$("#adminss-date-div .datepicker").mousedown(function() {
+	    $('#ui-datepicker-div').toggle();
+	});
+	
+	/**
+	 * submit shuttle service form to get itineraries
+	 */
+	$("#admin-ss-submit").click(function(e){
+		//check if all fields are filled
+		var allset = true;
+		$("div.additinerary-error-message").find(".error-message").css("display", "none").html(" ");
+		if($("#admin-ss-destination-div .selected-li").length > 0){
+			var destination = $("#admin-ss-destination-div .selected-li").data("destinationid");
+			$("#admin-ss-destination-error").css("display", "none");
+		}else{
+			if($("#new-destination-name").val().length>0){
+				var name = $("#new-destination-name").val();
+				var description = $("#new-destination-description").val();
+			}else{
+				allset = false;
+				$("#admin-ss-destination-error").css("display", "block");
+			}			
+		}
+		if($("#admin-ss-date-div .datepicker").val() != ""){
+			var date = $("#admin-ss-date-div .datepicker").val();
+			$("#admin-ss-date-error").css("display", "none");
+		}else{
+			allset = false;
+			$("#admin-ss-date-error").css("display", "block");
+		}
+		if($("#admin-ss-hour-select").val()!=null && $("#admin-ss-minute-select").val()!=null){
+			var hour = $("#admin-ss-hour-select").val();
+			var minute = $("#admin-ss-minute-select").val();
+			$("#admin-ss-time-error").css("display", "none");
+		}else{
+			allset = false;
+			$("#admin-ss-time-error").css("display", "block");
+		}
+		if($("#admin-ss-vehicle-div input").val() != ""){
+			var vehicle = $("#admin-ss-vehicle-div input").val();
+			$("#admin-ss-vehicle-error").css("display", "none");
+		}else{
+			allset = false;
+			$("#admin-ss-vehicle-error").css("display", "block");
+		}
+		if(allset == true){ //submit to fetch qualified itineraries
+			//prepare date value
+			var month = date.slice(0,2);
+			var day = date.slice(3,5);
+			var year = date.slice(6);
+			var datestring = year.concat(month, day);
+			$.ajax({
+				url:"/administration/shuttleservice/additinerary",
+				dataType:"json",
+				type:"post",
+				data:{DestinationId:destination,
+					Name:name,
+					Description:description,
+					Date:datestring,
+					Hour:hour,
+					Minute:minute,
+					Vehicle:vehicle},
+				success: function(response) {
+					if(response.success){
+						console.log("1");
+						$("div.additinerary-error-message").find(".error-message").css("display", "block").html("添加成功！");
+					}else{
+						$("div.additinerary-error-message").find(".error-message").css("display", "block").html("Error: "+response.message);
+					}
+				},
+				beforeSend: function() {
+					
+				},
+				error: function(xhr, status, error) {
+					$(".additinerary-error-message span").html("Error");
+					console.log(xhr.responseText);
+				}
+			});
+		}
+		
 	});
 	
 });

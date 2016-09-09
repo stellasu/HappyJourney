@@ -191,5 +191,33 @@ class ItineraryService {
 			return false;
 		}
 	}
+	
+	/**
+	 * add a new itinerary
+	 * @param array $data{DestinationId, Date, Hour, Minute, Vehicle}
+	 */
+	public function addItinerary(Array $data = null)
+	{
+		if(isset($data['DestinationId']) && $data['DestinationId']!=null
+				&& isset($data['Date']) && $data['Date']!=null
+				&& isset($data['Hour']) && $data['Hour']!=null
+				&& isset($data['Minute']) && $data['Minute']!=null
+				&& isset($data['Vehicle']) && $data['Vehicle']!=null){
+			try {
+				$sql = new Sql($this->db);
+				$insert = $sql->insert('Itinerary');
+				$insert->values($data);
+				$statement = $sql->prepareStatementForSqlObject($insert);
+				$results = $statement->execute();
+				$lastInsertId = $this->db->getDriver()->getLastGeneratedValue();
+			} catch (\Exception $e) {
+				error_log("error: ".$e->getMessage());
+				return null;
+			}
+			return $lastInsertId;
+		}else{
+			return null;
+		}
+	}
 
 }

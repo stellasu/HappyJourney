@@ -32,7 +32,7 @@ table.bottom-space {
 	border-radius: 0.5em;
 }
 
-.ss-selection-div {
+.ss-selection-div,  .admin-ss-selection-div{
 	padding: 0.5em;
 }
 
@@ -58,7 +58,7 @@ table.bottom-space {
 	background-color: transparent;
 }
 
-#ss-time-div select {
+#ss-time-div select, #admin-ss-time-div select {
     background: transparent;
     width: 6.25em;
     margin: 5px 0px 10px 0px;
