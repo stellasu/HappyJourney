@@ -24,4 +24,12 @@ How to use
 <p>To visit the Application side, please go to <I>http://[site base url]/</I></p>
 <p>To visit the Administration side, please go to <I>http://[site base url]/administration</I></p>
 
+Built with
+----------
+Zend Framework 2
+
+Video Demo
+----------
+https://drive.google.com/file/d/0B24RUusCOQNCYXppdE1rZUZqOXc/view
+
 
