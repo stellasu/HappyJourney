@@ -2,7 +2,7 @@
 
 What is this
 -------------
-<p>This is a web application built for travel agent. It has an Application module for the website visitors and an Administration module built for the administrator. This is specifically for Chinese users.</p>
+<p>HappyJourney is a mobile-friendly web application built for travel agent. It has an Application module for the website visitors and an Administration module built for the administrator. This is specifically for Chinese users.</p>
 <p>In Application side, customers can: </p>
 <ul>
 <li>Read introductions of attractions</li>
