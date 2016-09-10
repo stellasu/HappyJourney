@@ -6,7 +6,7 @@
 					<?php foreach($this->result['messages'] as $item):?>
 						<div id="message-div-<?php echo $item->Id;?>">
 							<table class="list-contact-table">
-								<tr><th>First Name</th><th>Last Name</th><th>Time</th><th>Phone</th><th>Email</th><th>Wechat</tr>
+								<tr><th>名</th><th>姓</th><th>时间</th><th>电话</th><th>邮箱</th><th>微信</tr>
 								<tr>
 									<td><?php echo $item->FirstName;?></td>
 									<td><?php echo $item->LastName;?></td>
@@ -17,30 +17,30 @@
 								</tr>
 							</table>
 							<div class="display-message-div">
-								<span>Message: </span>
+								<span>留言：</span>
 								<span class="display-message"><?php echo $item->Message;?></span>
 							</div>
-							<div class="delete-message-div"><button class="delete-message-btn" data-Id=<?php echo $item->Id;?>>Delete</button></div>
+							<div class="delete-message-div"><button class="delete-message-btn" data-Id=<?php echo $item->Id;?>>删除</button></div>
 							<br>
 						</div>
 					<?php endforeach;?>					
 					<div class="ct-message-pages-div">
 						<?php if($this->result['current'] != 1):?>
-						<span><a href="/administration/customizedtravel/1">first</a></span>
+						<span><a href="/administration/customizedtravel/1">首页</a></span>
 						<?php endif;?>						
 						<?php if($this->result['previous'] != null):?>
-						<span><a href="/administration/customizedtravel/<?php echo $this->result['previous'];?>">previous</a></span>
+						<span><a href="/administration/customizedtravel/<?php echo $this->result['previous'];?>">前一页</a></span>
 						<?php endif;?>						
 						<span><?php echo $this->result['current'];?></span>						
 						<?php if($this->result['next'] != null):?>
-						<span><a href="/administration/customizedtravel/<?php echo $this->result['next'];?>">next</a></span>
+						<span><a href="/administration/customizedtravel/<?php echo $this->result['next'];?>">后一页</a></span>
 						<?php endif;?>						
 						<?php if($this->result['last'] != $this->result['current']):?>
 						<span><a href="/administration/customizedtravel/<?php echo $this->result['last'];?>"><?php echo $this->result['last'];?></a></span>
 						<?php endif;?>						
 					</div>
 				<?php else:?>
-					No more messages.
+					没有更多留言。
 				<?php endif;?>
 		 	 </div>
 		</div>

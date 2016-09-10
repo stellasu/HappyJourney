@@ -18,6 +18,7 @@ use Zend\Session\Config\SessionConfig;
 use Zend\Session\Container;
 use Zend\Session\SessionManager;
 use Zend\Authentication\Storage\Session as SessionStorage;
+use Zend\ModuleManager\ModuleManager;
 
 class Module
 {
@@ -82,5 +83,13 @@ class Module
     	$sessionManager = new SessionManager($sessionConfig);
     	$sessionManager->start();
     	Container::setDefaultManager($sessionManager);
+    }
+    
+    public function init(ModuleManager $mm)
+    {
+    	$mm->getEventManager()->getSharedManager()->attach(__NAMESPACE__,
+    		'dispatch', function($e) {
+    			$e->getTarget()->layout('admin/layout');
+    		});
     }
 }

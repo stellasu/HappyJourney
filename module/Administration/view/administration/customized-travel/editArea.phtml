@@ -6,22 +6,22 @@
 					<?php foreach($this->result as $item):?>
 						<div id="area-div-<?php echo $item['Id'];?>" class="display-area-div">
 							<div class="area-detail-div">
-								<div>Area: <?php echo $item['Name'];?></div>
+								<div>景点：<?php echo $item['Name'];?></div>
 								<div class="area-edit-div">
-									<div>Description: </div>
+									<div>介绍： </div>
 									<textarea rows="10" col="40"><?php echo $item['Description'];?></textarea>
 								</div>
 							</div>
 							<div class="edit-area-submit-div" data-Id=<?php echo $item['Id'];?>>
-								<button data-type="edit">Edit</button>
-								<button data-type="delete">Delete</button>
+								<button data-type="edit">提交编辑</button>
+								<button data-type="delete">删除</button>
 							</div>
 							<span class="error-message"></span>
 							<br>
 						</div>
 					<?php endforeach;?>					
 				<?php else:?>
-					No Areas.
+					没有更多条目。
 				<?php endif;?>
 		 	 </div>
 		</div>

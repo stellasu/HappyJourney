@@ -11,6 +11,7 @@ namespace Application;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\ModuleManager;
 
 class Module
 {
@@ -39,5 +40,13 @@ class Module
         			__DIR__ . '/../../autoload_classmap.php',
         	),
         );
+    }
+    
+    public function init(ModuleManager $mm)
+    {
+    	$mm->getEventManager()->getSharedManager()->attach(__NAMESPACE__,
+    		'dispatch', function($e) {
+    			$e->getTarget()->layout('application/layout');
+    		});
     }
 }

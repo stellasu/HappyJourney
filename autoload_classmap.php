@@ -3,8 +3,9 @@
 return array(
     'Administration\Module'                                                               => __DIR__ . '/module/Administration/Module.php',
     'Administration\Controller\AuthController'                                            => __DIR__ . '/module/Administration/src/Administration/Controller/AuthController.php',
+    'Administration\Controller\CustomizedTravelController'                                => __DIR__ . '/module/Administration/src/Administration/Controller/CustomizedTravelController.php',
     'Administration\Controller\IndexController'                                           => __DIR__ . '/module/Administration/src/Administration/Controller/IndexController.php',
-    'Administration\Controller\LoginController'                                           => __DIR__ . '/module/Administration/src/Administration/Controller/LoginController.php',
+    'Administration\Controller\ShuttleServiceController'                                  => __DIR__ . '/module/Administration/src/Administration/Controller/ShuttleServiceController.php',
     'Administration\Model\AuthStorage'                                                    => __DIR__ . '/module/Administration/src/Administration/Model/AuthStorage.php',
     'Administration\Service\Factory\Database'                                             => __DIR__ . '/module/Administration/src/Administration/Service/Factory/Database.php',
     'Administration\Service\Factory\EntityManager'                                        => __DIR__ . '/module/Administration/src/Administration/Service/Factory/EntityManager.php',
